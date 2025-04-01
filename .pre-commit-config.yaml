@@ -1,1 +1,52 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
 
+# To use:
+# 1. pip install pre-commit
+# 2. pre-commit install
+# Now hooks will run automatically before each commit.
+# To run manually on all files: pre-commit run --all-files
+
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0 # Use the latest stable version
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: check-added-large-files # Prevent accidentally committing large files
+        args: ['--maxkb=1024'] # Check for files > 1MB
+
+-   repo: https://github.com/psf/black
+    rev: 23.3.0 # Use version consistent with pyproject.toml
+    hooks:
+    -   id: black
+        language_version: python3.9 # Specify your target Python version
+
+-   repo: https://github.com/pycqa/isort
+    rev: 5.12.0 # Use version consistent with pyproject.toml
+    hooks:
+    -   id: isort
+        name: isort (python)
+        args: ["--profile", "black"]
+
+-   repo: https://github.com/pycqa/flake8
+    rev: 6.0.0 # Use version consistent with pyproject.toml
+    hooks:
+    -   id: flake8
+        # additional_dependencies: [flake8-bugbear] # Add plugins here if used
+
+# Optional: Add mypy for static type checking (can be slow)
+# -   repo: https://github.com/pre-commit/mirrors-mypy
+#     rev: 'v1.2.0' # Use version consistent with pyproject.toml
+#     hooks:
+#     -   id: mypy
+#         # args: [--config-file=pyproject.toml] # If config is in pyproject.toml
+#         additional_dependencies: [types-requests, types-PyYAML] # Add types for libraries used
+
+# Optional: Add check for secrets
+# -   repo: https://github.com/detect-secrets/detect-secrets
+#     rev: v1.4.0
+#     hooks:
+#     -   id: detect-secrets
+#         args: ['--baseline', '.secrets.baseline'] # Create baseline with `detect-secrets scan > .secrets.baseline`
