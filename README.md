@@ -1,4 +1,4 @@
-# Chimera ML 🧠 exoskel: Machine Learning for Mind-Controlled Exoskeletons
+# Chimera 🧠: Machine Learning for Mind-Controlled Exoskeletons
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/heya-vyom/chimera_v2.0/tests.yml?branch=main&style=flat-square)](https://github.com/heya-vyom/chimera_v2.0/actions/workflows/tests.yml) <!-- Update with actual CI badge link -->
 [![Code Coverage](https://img.shields.io/codecov/c/github/[Your%20Org%20or%20Username]/chimera-ml?style=flat-square)](https://codecov.io/gh/[Your%20Org%20or%20Username]/chimera-ml) <!-- Update with actual Coverage badge link -->
