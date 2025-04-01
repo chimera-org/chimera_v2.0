@@ -1,1 +1,162 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+name = "chimera-ml"
+version = "0.1.0" # Follow Semantic Versioning (https://semver.org/)
+description = "Machine Learning library for the Chimera mind-controlled exoskeleton project."
+authors = ["[Your Name <you@chimera.ai>]", "[Another Contributor <another@chimera.ai>]"] # Add contributors here
+license = "Apache-2.0" # MUST match the LICENSE file content identifier
+readme = "README.md"
+homepage = "https://github.com/[Your Org or Username]/chimera-ml" # Link to your repo
+repository = "https://github.com/[Your Org or Username]/chimera-ml"
+documentation = "https://[Your Org or Username].github.io/chimera-ml" # Link to hosted docs if available
+keywords = ["bci", "eeg", "machine learning", "exoskeleton", "neuroscience", "mne"]
+classifiers = [ # PyPI classifiers: https://pypi.org/classifiers/
+    "Development Status :: 3 - Alpha", # Change as project matures (Beta, Production/Stable)
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+packages = [{include = "chimera_ml", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12" # Specify compatible Python versions
+
+# Core ML / Numerics
+numpy = "^1.23" # Use specific, compatible versions
+scipy = "^1.10"
+scikit-learn = "^1.2"
+pandas = "^2.0" # For data handling if needed
+
+# EEG/BCI Specific
+mne = "^1.3" # Core EEG processing library
+pyedflib = "^0.1" # For reading EDF files
+# mne-features = "^0.3" # Optional: Convenient feature extraction
+
+# Deep Learning (Choose one or add conditional dependencies)
+# torch = "^2.0"
+# torchvision = "^0.15"
+# torchaudio = "^2.0"
+# OR
+# tensorflow = "^2.12"
+
+# Experiment Tracking (Choose one or make optional)
+# mlflow = "^2.3"
+# wandb = "^0.15"
+
+# Configuration Management
+hydra-core = "^1.3" # Or omegaconf directly
+omegaconf = "^2.3"
+
+# Utilities
+PyYAML = "^6.0" # For config files if not using Hydra exclusively
+loguru = "^0.7" # Or standard logging
+
+# Deployment / API (Optional - make extras if not always needed)
+# fastapi = "^0.95"
+# uvicorn = {extras = ["standard"], version = "^0.22"}
+# ros-noetic-rospy = "*" # Example if ROS is needed; manage carefully
+
+[tool.poetry.group.dev.dependencies]
+# Testing
+pytest = "^7.3"
+pytest-cov = "^4.0" # For coverage reports
+pytest-mock = "^3.10"
+
+# Linting & Formatting
+black = "^23.3"
+flake8 = "^6.0"
+flake8-bugbear = "^23.3" # Additional useful flake8 checks
+isort = "^5.12"
+mypy = "^1.2" # Static type checking
+
+# Notebooks
+jupyterlab = "^3.6"
+ipykernel = "^6.22"
+matplotlib = "^3.7"
+seaborn = "^0.12" # For plotting
+
+# Documentation (Optional - make extras if needed)
+# sphinx = "^6.2"
+# sphinx-rtd-theme = "^1.2"
+# sphinx-napoleon = "^0.7" # For Google/Numpy style docstrings
+# mkdocs = "^1.4"
+# mkdocs-material = "^9.1"
+
+# Pre-commit hooks manager
+pre-commit = "^3.3"
+
+# DVC for data versioning
+dvc = {extras = ["s3"], version = "^2.58"} # Include extras for cloud storage (s3, gcs, azure, ssh)
+
+
+[tool.poetry.extras]
+# Example of defining optional dependencies (e.g., for specific hardware or features)
+# install using: poetry install --extras "torch deployment"
+torch = ["torch", "torchvision", "torchaudio"]
+tensorflow = ["tensorflow"]
+mlflow = ["mlflow"]
+wandb = ["wandb"]
+deployment = ["fastapi", "uvicorn"]
+docs = ["sphinx", "sphinx-rtd-theme", "sphinx-napoleon", "mkdocs", "mkdocs-material"]
+
+
+[tool.black]
+line-length = 88
+target-version = ['py39', 'py310', 'py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | notebooks # Usually exclude notebooks from strict formatting
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+skip_gitignore = true
+# skip = [".venv", "build", "dist"] # Redundant if gitignore is skipped
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --cov=src/chimera_ml --cov-report=term-missing" # Show reasons for skips/fails, quiet, add coverage
+testpaths = [
+    "tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning", # Ignore specific warnings if necessary
+]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true # Be careful with this; ideally add stubs or ignore specific missing libs
+exclude = ['notebooks/', 'venv/', '\.venv']
+
+# Add sections for other tools like flake8 if preferred over separate .flake8 file
