@@ -1,6 +1,6 @@
 # Contributing to Chimera
 
-First off, thank you for considering contributing to the Chimera ML project! Whether it's reporting a bug, discussing improvements, or contributing code, your involvement is valuable. This document outlines how to contribute effectively.
+First off, thank you for considering contributing to the Chimera project! Whether it's reporting a bug, discussing improvements, or contributing code, your involvement is valuable. This document outlines how to contribute effectively.
 
 ## Table of Contents
 
@@ -86,8 +86,8 @@ We use [Poetry](https://python-poetry.org/) for dependency management and packag
 1.  **Install Poetry:** Follow the instructions on the [Poetry website](https://python-poetry.org/docs/#installation).
 2.  **Clone your fork:**
     ```bash
-    git clone git@github.com:your-username/chimera-ml.git
-    cd chimera-ml
+    git clone git@github.com:heya-vyom/chimera_v2.0.git
+    cd chimera_v2.0
     ```
 3.  **Install dependencies (including dev dependencies):**
     ```bash
@@ -150,5 +150,5 @@ These checks are often enforced via `pre-commit` hooks and CI pipelines.
 
 Thank you for contributing!
 
-[Link to Issue Tracker]: https://github.com/[Your Org or Username]/chimera-ml/issues
+[Link to Issue Tracker]: https://github.com/heya-vyom/chimera_v2.0/ISSUES_TRACKER.md
 [Link to PR Template in .github/]: ./.github/pull_request_template.md
