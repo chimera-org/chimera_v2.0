@@ -18,13 +18,13 @@ First off, thank you for considering contributing to the Chimera ML project! Whe
 
 ## Code of Conduct
 
-This project and everyone participating in it are governed by the [Chimera Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to `[INSERT CONTACT METHOD]`.
+This project and everyone participating in it are governed by the [Chimera Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to `[]`.
 
 ## How Can I Contribute?
 
 ### Reporting Bugs
 
-If you encounter a bug, please check the [issue tracker][Link to Issue Tracker] first to see if it has already been reported. If not, please open a new issue using the "Bug Report" template. Provide as much detail as possible, including:
+If you encounter a bug, please check the [bug report](bug_report.md) first to see if it has already been reported. If not, please open a new issue using the "Bug Report" template. Provide as much detail as possible, including:
 
 *   A clear and descriptive title.
 *   Steps to reproduce the bug.
@@ -37,13 +37,13 @@ If you encounter a bug, please check the [issue tracker][Link to Issue Tracker] 
 
 If you have an idea for an improvement or a new feature:
 
-1.  Check the [issue tracker][Link to Issue Tracker] for existing suggestions.
+1.  Check the [feature requests](feature_request.md) for existing suggestions.
 2.  If your idea is new, open an issue using the "Feature Request" template.
 3.  Clearly describe the enhancement, the motivation behind it (use case), and potential implementation ideas.
 
 ### Asking Questions
 
-If you have questions about the project, usage, or architecture, please use the [issue tracker][Link to Issue Tracker] with an appropriate label or use our designated communication channel `[e.g., Slack Channel, Mailing List]`.
+If you have questions about the project, usage, or architecture, please use the [issue tracker][ISSUE_TRACKER.md] with an appropriate label or use our designated communication channel `[e.g., Slack Channel, Mailing List]`.
 
 ### Contributing Code
 
@@ -75,7 +75,7 @@ We welcome code contributions! Here's the general workflow:
     ```bash
     git push origin feature/your-feature-name
     ```
-11. **Open a Pull Request (PR):** Go to the original `chimera-ml` repository and open a PR from your fork's branch to the `main` (or `develop`) branch. Fill out the PR template provided.
+11. **Open a Pull Request (PR):** Go to the original `chimera` repository and open a PR from your fork's branch to the `main` (or `develop`) branch. Fill out the PR template provided.
 12. **Code Review:** Project maintainers will review your PR. Address any feedback or requested changes.
 13. **Merge:** Once approved and CI checks pass, a maintainer will merge your PR.
 
