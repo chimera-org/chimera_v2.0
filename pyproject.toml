@@ -3,15 +3,15 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "chimera-ml"
-version = "0.1.0" # Follow Semantic Versioning (https://semver.org/)
+name = "chimera_v2.0"
+version = "2.0.0" # Follow Semantic Versioning (https://semver.org/)
 description = "Machine Learning library for the Chimera mind-controlled exoskeleton project."
-authors = ["[Your Name <you@chimera.ai>]", "[Another Contributor <another@chimera.ai>]"] # Add contributors here
+authors = ["[Vyom Mallick <vyommallick@gmail.com>]", "[Manthan Shinde]"] # Add contributors here
 license = "Apache-2.0" # MUST match the LICENSE file content identifier
 readme = "README.md"
-homepage = "https://github.com/[Your Org or Username]/chimera-ml" # Link to your repo
-repository = "https://github.com/[Your Org or Username]/chimera-ml"
-documentation = "https://[Your Org or Username].github.io/chimera-ml" # Link to hosted docs if available
+homepage = "https://github.com/heya-vyom/chimera_v2.0" # Link to your repo
+repository = "https://github.com/heya-vyom/chimera_v2.0"
+documentation = "https://heya-vyom.github.io/chimera_v2.0" # Link to hosted docs if available
 keywords = ["bci", "eeg", "machine learning", "exoskeleton", "neuroscience", "mne"]
 classifiers = [ # PyPI classifiers: https://pypi.org/classifiers/
     "Development Status :: 3 - Alpha", # Change as project matures (Beta, Production/Stable)
@@ -27,7 +27,7 @@ classifiers = [ # PyPI classifiers: https://pypi.org/classifiers/
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-packages = [{include = "chimera_ml", from = "src"}]
+packages = [{include = "chimera_v2.0", from = "src"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12" # Specify compatible Python versions
