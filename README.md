@@ -310,4 +310,4 @@ This project is licensed under the Apache License, Version 2.0. See the LICENSE 
 
 ---
 
-*[Link to Issue Tracker]:* [https://github.com/heya-vyom/chimera_v2.0/issues]*
+*[Link to Issue Tracker]:* [https://github.com/heya-vyom/chimera_v2.0/issues]
