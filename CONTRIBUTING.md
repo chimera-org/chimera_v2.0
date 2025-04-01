@@ -50,7 +50,7 @@ If you have questions about the project, usage, or architecture, please use the 
 We welcome code contributions! Here's the general workflow:
 
 1.  **Find an issue:** Look for issues tagged with `help wanted` or `good first issue`, or discuss a new contribution idea by opening an issue first.
-2.  **Fork the repository:** Create your own copy of the `chimera-ml` repository on GitHub.
+2.  **Fork the repository:** Create your own copy of the `chimera` repository on GitHub.
 3.  **Create a branch:** Create a descriptive branch name from the `main` (or `develop` if used) branch (e.g., `feature/add-csp-component` or `fix/filter-bug-123`).
     ```bash
     git checkout main
