@@ -304,7 +304,7 @@ This project is licensed under the Apache License, Version 2.0. See the LICENSE 
 
 - **Technical Lead:** `[Vyom / vyommallick@gmail.com]`
 
-- **Bug Reports / Feature Requests:** [GitHub Issues](ISSUE_TRACKER.md)
+- **Bug Reports / Feature Requests:** [GitHub Issues](https://github.com/heya-vyom/chimera_v2.0/.github/ISSUE_TEMPLATE)
 
 - **General Discussion:** `[Slack Channel / Mailing List, if applicable]`
 
