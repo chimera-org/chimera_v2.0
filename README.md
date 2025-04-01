@@ -1,6 +1,6 @@
 # Chimera ML 🧠 exoskel: Machine Learning for Mind-Controlled Exoskeletons
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/[Your%20Org%20or%20Username]/chimera-ml/tests.yml?branch=main&style=flat-square)](https://github.com/[Your Org or Username]/chimera-ml/actions/workflows/tests.yml) <!-- Update with actual CI badge link -->
+[![Build Status](https://img.shields.io/github/actions/workflow/status/heya-vyom/chimera_v2.0/tests.yml?branch=main&style=flat-square)](https://github.com/[Your Org or Username]/chimera-ml/actions/workflows/tests.yml) <!-- Update with actual CI badge link -->
 [![Code Coverage](https://img.shields.io/codecov/c/github/[Your%20Org%20or%20Username]/chimera-ml?style=flat-square)](https://codecov.io/gh/[Your%20Org%20or%20Username]/chimera-ml) <!-- Update with actual Coverage badge link -->
 [![License](https://img.shields.io/github/license/[Your%20Org%20or%20Username]/chimera-ml?style=flat-square)](LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11-blue?style=flat-square)](pyproject.toml) <!-- Verify supported versions -->
@@ -302,7 +302,7 @@ This project is licensed under the Apache License, Version 2.0. See the LICENSE 
 
 ## ✉️ Contact
 
-- **Technical Lead:** `[Lead ML Engineer Name/Email]`
+- **Technical Lead:** `[Lead ML Engineer Vyom/vyommallick@gmail.com]`
 
 - **Bug Reports / Feature Requests:** [GitHub Issues][Link to Issue Tracker]
 
@@ -310,7 +310,4 @@ This project is licensed under the Apache License, Version 2.0. See the LICENSE 
 
 ---
 
-*[Link to Issue Tracker]:* [https://github.com/[Your](https://github.com/[Your) *Org or Username]/chimera-ml/issues*
-*(Remember to keep this README updated as the project evolves!)*
-
-
+*[Link to Issue Tracker]:* [https://github.com/heya-vyom/chimera_v2.0/issues]*
