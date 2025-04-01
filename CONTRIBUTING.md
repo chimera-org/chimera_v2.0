@@ -43,7 +43,7 @@ If you have an idea for an improvement or a new feature:
 
 ### Asking Questions
 
-If you have questions about the project, usage, or architecture, please use the [issue tracker][ISSUE_TRACKER.md] with an appropriate label or use our designated communication channel `[e.g., Slack Channel, Mailing List]`.
+If you have questions about the project, usage, or architecture, please use the [issue tracker](ISSUE_TRACKER.md) with an appropriate label or use our designated communication channel `[e.g., Slack Channel, Mailing List]`.
 
 ### Contributing Code
 
