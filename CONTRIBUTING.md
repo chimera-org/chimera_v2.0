@@ -18,7 +18,7 @@ First off, thank you for considering contributing to the Chimera ML project! Whe
 
 ## Code of Conduct
 
-This project and everyone participating in it are governed by the [Chimera ML Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to `[INSERT CONTACT METHOD]`.
+This project and everyone participating in it are governed by the [Chimera Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to `[INSERT CONTACT METHOD]`.
 
 ## How Can I Contribute?
 
