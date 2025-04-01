@@ -1,1 +1,30 @@
+[flake8]
+# See https://flake8.pycqa.org/en/latest/user/configuration.html
+# Most checks are enabled by default.
 
+# Errors/Warnings to ignore:
+# E501: line too long (handled by black)
+# W503: line break before binary operator (black prefers this)
+# E203: whitespace before ':' (conflicts with black)
+# F401: unused import (useful during development, but can enable later)
+# F841: unused local variable (useful during development, but can enable later)
+ignore = E501, W503, E203, F401, F841
+
+# Max line length (redundant if using black, but good practice)
+max-line-length = 88
+
+# Max complexity (McCabe complexity) - adjust as needed
+max-complexity = 12
+
+# Files/directories to exclude
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    .venv,
+    venv,
+    notebooks/ # Often less strict linting needed for notebooks
+
+# Enable specific plugins if installed (e.g., flake8-bugbear)
+# select = B,C,E,F,W,T4,B9 # Example: Default + bugbear + print statements
