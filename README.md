@@ -302,12 +302,12 @@ This project is licensed under the Apache License, Version 2.0. See the LICENSE 
 
 ## ✉️ Contact
 
-- **Technical Lead:** `[Lead ML Engineer Vyom/vyommallick@gmail.com]`
+- **Technical Lead:** `[Vyom / vyommallick@gmail.com]`
 
-- **Bug Reports / Feature Requests:** [GitHub Issues][Link to Issue Tracker]
+- **Bug Reports / Feature Requests:** [GitHub Issues](ISSUE_TRACKER.md)
 
 - **General Discussion:** `[Slack Channel / Mailing List, if applicable]`
 
 ---
 
-*[Link to Issue Tracker]:* [https://github.com/heya-vyom/chimera_v2.0/issues]
+*[Link to Issue Tracker]:* [https://github.com/heya-vyom/chimera_v2.0/ISSUE_TRACKER.md]
