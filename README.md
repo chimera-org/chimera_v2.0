@@ -1,24 +1,3 @@
----
-type: Page
-title: readme
-description: null
-icon: null
-createdAt: '2025-04-01T07:52:24.361Z'
-creationDate: 2025-04-01 13:22
-modificationDate: 2025-04-01 13:24
-tags: []
-coverImage: null
----
-
-Okay, absolutely. Based on the finalized repository structure you provided (`code3.txt`), here is a comprehensive `README.md` file.
-
-Regarding your question: **Yes, you absolutely should explain the basic usage of the repository in the README.md file.** It's the primary entry point, and users need quick instructions on how to install, configure, and run the most common tasks (like processing data, training a model, running tests).
-
-More *detailed* usage guides, tutorials, or API references can go into the `/docs` directory (e.g., `docs/usage_guide.md`, `docs/api/index.md`), and you can link to them from the README. But the essential "how to get started and run things" belongs here.
-
---- START OF FILE `README.md` ---
-
-```markdown
 # Chimera ML 🧠 exoskel: Machine Learning for Mind-Controlled Exoskeletons
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/[Your%20Org%20or%20Username]/chimera-ml/tests.yml?branch=main&style=flat-square)](https://github.com/[Your Org or Username]/chimera-ml/actions/workflows/tests.yml) <!-- Update with actual CI badge link -->
