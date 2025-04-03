@@ -506,5 +506,5 @@ If you're stuck after consulting this guide, project docs, and searching issues:
 
 This Playbook is a dynamic resource. Contribute improvements via PRs!
 
-[Link to Issue Tracker]: [https://github.com/[Your](https://www.google.com/url?sa=E&q=https%3A%2F%2Fgithub.com%2F%5BYour) Org or Username]/chimera-ml/issues
+[Link to Issue Tracker]: [https://github.com/heya-vyom/chimera_v2.0/ISSUE_TRACKER.md](Issue Tracker)
 
