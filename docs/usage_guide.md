@@ -1,15 +1,3 @@
----
-type: Page
-title: usage_guide
-description: null
-icon: null
-createdAt: '2025-04-03T04:31:20.224Z'
-creationDate: 2025-04-03 10:01
-modificationDate: 2025-04-03 10:14
-tags: []
-coverImage: null
----
-
 # 🧠 Chimera ML Operational Playbook 🚀
 
 Welcome, Engineer, to the Chimera ML Operational Playbook! This is your definitive guide to navigating and leveraging the `chimera_v2.0` repository for cutting-edge BCI research and development. Consider this the operational manual for our mission to restore movement.
