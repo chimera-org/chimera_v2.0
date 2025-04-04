@@ -498,13 +498,11 @@ When things go wrong:
 
 If you're stuck after consulting this guide, project docs, and searching issues:
 
-- **GitHub Issues:** Check the [Issue Tracker][Link to Issue Tracker] first. If your problem isn't there, open a new, detailed issue (use templates!).
+- **GitHub Issues:** Check the [Issue Tracker](https://github.com/heya-vyom/chimera_v2.0/ISSUE_TRACKER.md) first. If your problem isn't there, open a new, detailed issue (use templates!).
 
 - **Team Channel:** Ask on [Specify #chimera-ml Slack Channel or relevant communication method]. Provide context, what you've tried, and relevant logs/configs.
 
 ---
 
 This Playbook is a dynamic resource. Contribute improvements via PRs!
-
-Link to Issue Tracker: [Issue Tracker](https://github.com/heya-vyom/chimera_v2.0/ISSUE_TRACKER.md)
 
