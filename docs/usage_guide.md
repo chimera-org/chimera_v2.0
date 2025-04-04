@@ -1,4 +1,4 @@
-# 🧠 Chimera ML Operational Playbook 🚀
+# 🧠 Chimera Operational Playbook 🚀
 
 Welcome, Engineer, to the Chimera ML Operational Playbook! This is your definitive guide to navigating and leveraging the `chimera_v2.0` repository for cutting-edge BCI research and development. Consider this the operational manual for our mission to restore movement.
 
@@ -120,7 +120,7 @@ Hydra is the central nervous system for configuring experiments and pipelines in
       - override hydra/hydra_logging: colorlog
     
     # Global parameters shared across runs unless overridden
-    project_name: "chimera_ml"
+    project_name: "chimera_v2.0"
     seed: 42 # For reproducibility!
     ```
 
