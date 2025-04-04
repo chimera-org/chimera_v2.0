@@ -2,7 +2,7 @@
 
 Welcome, Engineer, to the Chimera ML Operational Playbook! This is your definitive guide to navigating and leveraging the `chimera_v2.0` repository for cutting-edge BCI research and development. Consider this the operational manual for our mission to restore movement.
 
-This document assumes you've completed the initial onboarding: environment setup via README.md (../README.md) and familiarization with contribution protocols in CONTRIBUTING.md (../CONTRIBUTING.md).
+This document assumes you've completed the initial onboarding: environment setup via (README.md)[https://github.com/heya-vyom/chimera_v2.0/README.md] and familiarization with contribution protocols in (CONTRIBUTING.md)[https://github.com/heya-vyom/chimera_v2.0/CONTRIBUTING.md].
 
 **🎯 Objective:** To provide a comprehensive, best-practice-driven guide for executing core machine learning workflows – from data ingestion to model deployment readiness – within the Chimera ecosystem.
 
