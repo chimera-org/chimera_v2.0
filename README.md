@@ -31,7 +31,7 @@ It encompasses the entire ML pipeline from raw data ingestion and preprocessing 
 The project adheres to a standard layout for maintainability and scalability:
 
 ```plaintext
-/chimera-ml/
+/chimera_v2.0/
 ├── .dvc/             # DVC metadata (data/model versioning)
 ├── .git/             # Git metadata
 ├── .github/          # GitHub Actions workflows, issue/PR templates
