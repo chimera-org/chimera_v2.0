@@ -24,7 +24,7 @@ It encompasses the entire ML pipeline from raw data ingestion and preprocessing 
     *   [MLflow](https://mlflow.org/) / [Weights & Biases](https://wandb.ai/) integration (configurable) for experiment tracking.
 *   **Real-time Ready:** Includes components designed for online BCI inference loops (`inference/online.py`).
 *   **Quality Assured:** Enforced code style (Black, isort), linting (Flake8), type checking (mypy via pre-commit), and a comprehensive test suite (`pytest`).
-*   **Modular & Extensible:** Built as an installable Python package (`chimera_ml`) with clearly defined components.
+*   **Modular & Extensible:** Built as an installable Python package (`chimera`) with clearly defined components.
 
 ## 🏛️ Repository Structure
 
