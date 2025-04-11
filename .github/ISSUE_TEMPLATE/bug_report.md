@@ -71,33 +71,45 @@ Before submitting, please search open/closed issues to avoid duplicates.
 
 ```python
 # Insert your code here
+```
 
-📋 Command Output
+## 📋 Command Output
 Command Output
-⚙️ Configuration Files
+
+## ⚙️ Configuration Files
 Configuration
-📜 Logs
+
+## 📜 Logs
 Log Output
-📸 Screenshots / Videos
-🧠 EEG Data Information (if applicable)
+
+## 📸 Screenshots / Videos
+
+## 🧠 EEG Data Information (if applicable)
 Data sampling rate:
 Number of channels:
 Preprocessing applied:
 Subject/Session ID:
-🤖 Exoskeleton Information (if applicable)
+
+## 🤖 Exoskeleton Information (if applicable)
 Model:
 Firmware version:
 Control mode:
 Communication protocol:
-🔍 Additional Context
-💡 Possible Solution
-🔄 Workaround
-📑 Related Issues
-📱 Device/Browser Information (if UI-related)
+
+## 🔍 Additional Context
+
+## 💡 Possible Solution
+
+## 🔄 Workaround
+
+## 📑 Related Issues
+
+## 📱 Device/Browser Information (if UI-related)
 Browser:
 Device:
 Screen resolution:
-✅ Checklist
+
+## ✅ Checklist
  I have searched for similar issues and confirmed this is not a duplicate
  I have provided all the information requested in this template
  I have verified the issue still occurs in the latest version of Chimera
@@ -107,4 +119,5 @@ Screen resolution:
  I have run diagnostic tests where applicable
  I have included steps that others can follow to reproduce the issue
  I have tagged appropriate team members (if known)
-🔒 Security Implications
+
+## 🔒 Security Implications
