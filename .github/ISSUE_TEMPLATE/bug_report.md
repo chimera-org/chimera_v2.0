@@ -36,9 +36,6 @@ assignees: ''
 <!-- If applicable, paste the full command output including any error messages. Use code blocks (```) for formatting. -->
 ```bash
 # Paste command output here
-
-```bash
-# Paste command output here
 ```
 
 ## Configuration Files
