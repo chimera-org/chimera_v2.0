@@ -1,68 +1,73 @@
 ---
-name: Bug Report
-about: Create a report to help us improve Chimera
-title: '[BUG] '
-labels: 'bug'
-assignees: ''
+name: "🐛 Bug Report"
+about: "Report a reproducible bug or regression in Chimera v2.0"
+title: "[BUG] "
+labels: ["bug", "triage needed"]
+assignees: ""
 ---
 
-## Bug Description
-<!-- A clear and concise description of what the bug is. -->
+<!-- 
+🔍 Thanks for taking the time to fill out this bug report!
+Before submitting, please search open/closed issues to avoid duplicates.
+-->
 
-## Reproduction Steps
-<!-- Steps to reproduce the behavior: -->
+<div align="center">
+
+# 🐛 Bug Report
+
+**Chimera v2.0 - Brain-Controlled Exoskeleton Platform**
+
+</div>
+
+## 📝 Bug Description
+
+<!-- A clear and concise description of what the bug is. The more details, the better. -->
+
+## 🔄 Reproduction Steps
+
+<!-- Detailed steps to reproduce the behavior consistently -->
+
 1. 
 2. 
 3. 
 4. 
 
-## Expected Behavior
-<!-- A clear and concise description of what you expected to happen. -->
+## 🎯 Expected Behavior
 
-## Actual Behavior
-<!-- What actually happened instead of the expected behavior. Include any error messages, stack traces, or screenshots if applicable. -->
+<!-- A clear and concise description of what you expected to happen -->
 
-## Environment Information
-<!-- Please provide the following information: -->
-- Chimera Version: <!-- e.g., v2.0.1 -->
-- Python Version: <!-- e.g., 3.9.7 -->
-- Operating System: <!-- e.g., Ubuntu 22.04, Windows 11, macOS 12.3 -->
-- Hardware (if relevant): <!-- e.g., EEG Device Model, Exoskeleton type -->
-- Using Poetry: <!-- Yes/No -->
-- Virtual Environment: <!-- Poetry/venv/conda/etc. -->
-- DVC Enabled: <!-- Yes/No -->
+## ❌ Actual Behavior
 
-## Relevant Command Output
-<!-- If applicable, paste the full command output including any error messages. Use code blocks (```) for formatting. -->
-```bash
-# Paste command output here
-```
+<!-- What actually happened instead. Include full error messages and screenshots if applicable -->
 
-## Configuration Files
+## 📊 Frequency & Impact
 
-```yaml
-# Paste configuration here
-```
+<!-- How often does this bug occur? What is its impact on functionality? -->
 
-## Logs
+- Frequency: <!-- Always / Sometimes / Rarely / Only when... -->
+- Severity: <!-- Critical / High / Medium / Low -->
+- Impact: <!-- Blocks entire workflow / Affects specific feature / Minor inconvenience -->
+- Users affected: <!-- All users / Specific user roles / Specific hardware configurations -->
 
-```
-# Paste logs here
-```
+## 🖥️ Environment Information
 
-## Screenshots
+<!-- Please provide detailed environment information to help reproduce the issue -->
 
+| Category | Information |
+|----------|-------------|
+| Chimera Version | <!-- e.g., v2.0.1 --> |
+| Python Version | <!-- e.g., 3.9.7 --> |
+| Operating System | <!-- e.g., Ubuntu 22.04, Windows 11, macOS 12.3 --> |
+| Hardware | <!-- EEG Device Model, Exoskeleton type, CPU/GPU specifications --> |
+| Dependencies | <!-- Poetry / pip / conda --> |
+| Virtual Environment | <!-- Poetry / venv / conda / etc. --> |
+| DVC Version | <!-- e.g., 2.10.0 --> |
+| Hydra Version | <!-- e.g., 1.1.1 --> |
+| GPU (if applicable) | <!-- Model and driver version --> |
 
-## Additional Context
+## 🧪 Minimal Reproduction Code
 
+<!-- If applicable, provide the minimal code needed to reproduce the issue -->
 
-## Possible Solution
-
-
-## Checklist
-
-- [ ] I have checked that this issue hasn't already been reported
-- [ ] I have included all the information requested above
-- [ ] I have verified the issue still occurs in the latest version of Chimera
-- [ ] I have tested with minimal/default configuration to ensure the issue isn't specific to my setup
-- [ ] I can provide sample data files that trigger this issue (if applicable)
+```python
+# Insert your code here
