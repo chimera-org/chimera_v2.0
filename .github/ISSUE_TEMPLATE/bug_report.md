@@ -71,3 +71,40 @@ Before submitting, please search open/closed issues to avoid duplicates.
 
 ```python
 # Insert your code here
+
+📋 Command Output
+Command Output
+⚙️ Configuration Files
+Configuration
+📜 Logs
+Log Output
+📸 Screenshots / Videos
+🧠 EEG Data Information (if applicable)
+Data sampling rate:
+Number of channels:
+Preprocessing applied:
+Subject/Session ID:
+🤖 Exoskeleton Information (if applicable)
+Model:
+Firmware version:
+Control mode:
+Communication protocol:
+🔍 Additional Context
+💡 Possible Solution
+🔄 Workaround
+📑 Related Issues
+📱 Device/Browser Information (if UI-related)
+Browser:
+Device:
+Screen resolution:
+✅ Checklist
+ I have searched for similar issues and confirmed this is not a duplicate
+ I have provided all the information requested in this template
+ I have verified the issue still occurs in the latest version of Chimera
+ I have tested with minimal/default configuration to isolate the issue
+ I have attached relevant data files or provided access instructions
+ I have verified my environment meets the minimum requirements
+ I have run diagnostic tests where applicable
+ I have included steps that others can follow to reproduce the issue
+ I have tagged appropriate team members (if known)
+🔒 Security Implications
