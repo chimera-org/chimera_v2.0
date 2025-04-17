@@ -175,7 +175,7 @@ This threat model should be reviewed and updated:
 ## 🔗 Related Documents
 
 - [Security Architecture Overview](/security/architecture/security_architecture.md)
-- [Risk Management Plan](/regulatory/risk_management/risk_management_plan.md)
+- [Risk Management Plan](/regulatory/risk_management/indian_risk_management_plan.md)
 - [Secure Coding Guidelines](/security/secure_coding_guidelines.md)
 - [Security Testing Plan](/security/security_testing/security_testing_plan.md)
 
