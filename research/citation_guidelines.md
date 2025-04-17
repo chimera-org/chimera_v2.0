@@ -71,7 +71,41 @@ Example:
 International Organization for Standardization. (2016). ISO 13485:2016 Medical devices — Quality management systems — Requirements for regulatory purposes. Retrieved from https://www.iso.org/standard/59752.html
 ```
 
-### FDA and Regulatory Documentation
+For citing Bureau of Indian Standards (BIS):
+```
+Bureau of Indian Standards. (YYYY). [IS Number: Year] [Standard title]. Retrieved from https://www.bis.gov.in
+```
+
+Example:
+```
+Bureau of Indian Standards. (2022). IS 23485:2022 Medical Devices – Quality Management System – Requirements for regulatory purposes. Retrieved from https://www.bis.gov.in
+```
+
+### Indian Regulatory Documentation
+
+For CDSCO guidance documents:
+
+```
+Central Drugs Standard Control Organization. (YYYY). [Title of guidance]. [Document number if available]. Retrieved from [URL]
+```
+
+Example:
+```
+Central Drugs Standard Control Organization. (2022). Guidance Document on Common Submission Format for Registration of Medical Devices in India. Retrieved from https://cdsco.gov.in
+```
+
+For Medical Device Rules:
+
+```
+Ministry of Health and Family Welfare. (YYYY). Medical Devices Rules, [Year], [Section number if applicable]. Government of India.
+```
+
+Example:
+```
+Ministry of Health and Family Welfare. (2017). Medical Devices Rules, 2017, Rule 26. Government of India.
+```
+
+### FDA and International Regulatory Documentation
 
 For FDA guidance documents:
 
@@ -113,7 +147,7 @@ When publishing work that builds upon or utilizes the Chimera platform:
 4. Include a statement in the acknowledgments section recognizing the Chimera project's contribution
 
 Example acknowledgment:
-"This research utilized the Chimera v2.0 platform (https://github.com/chimera-org/chimera_v2.0), an open-source neural interface system designed for medical applications."
+"This research utilized the Chimera v2.0 platform (https://github.com/chimera-org/chimera_v2.0), an open-source neural interface system designed for medical applications, developed in India with compliance to Indian Medical Device Rules, 2017."
 
 ## Citation Management
 
@@ -125,8 +159,9 @@ The Chimera project encourages:
 
 1. Citing the final published version of a paper when available
 2. Including DOIs for all citations when available
-3. Using preprint server citations (arXiv, bioRxiv, etc.) when the final publication is not yet available
+3. Using preprint server citations (arXiv, bioRxiv, medRxiv, etc.) when the final publication is not yet available
 4. Prioritizing open access resources when possible
+5. Supporting Indian open access initiatives such as the Indian Open Access Repository
 
 ## Regulatory and Compliance Citations
 
@@ -134,8 +169,23 @@ For regulatory compliance documentation:
 
 1. Always cite the most current version of regulatory standards
 2. Include the effective date of regulatory guidance
-3. Specify the regulatory jurisdiction (FDA, EMA, etc.)
+3. Specify the regulatory jurisdiction (CDSCO, FDA, EMA, etc.)
 4. Note any specific sections or paragraphs referenced
+5. For Indian regulations, cite the Gazette notification number when available
+
+## India-Specific Citation Guidelines
+
+When citing Indian government publications:
+
+```
+[Ministry/Department Name]. (YYYY). [Title of document]. [Publication number if available]. Government of India.
+```
+
+For Indian journals with regional language titles, provide English translation in square brackets:
+
+```
+[Author(s)]. (YYYY). [Original title] [English translation of title]. [Journal Name in original language] [English translation of journal name], [Volume](Issue), [Page range]. https://doi.org/[DOI]
+```
 
 ## Version Control
 
@@ -155,5 +205,10 @@ American Psychological Association. (2020). Publication manual of the American P
 
 International Organization for Standardization. (2016). ISO 13485:2016 Medical devices — Quality management systems — Requirements for regulatory purposes. Retrieved from https://www.iso.org/standard/59752.html
 
-U.S. Food and Drug Administration. (2021). Software as a Medical Device (SaMD). Retrieved from https://www.fda.gov/medical-devices/digital-health-center-excellence/software-medical-device-samd
+Bureau of Indian Standards. (2022). IS 23485:2022 Medical Devices – Quality Management System – Requirements for regulatory purposes. Retrieved from https://www.bis.gov.in
 
+Central Drugs Standard Control Organization. (2017). Medical Devices Rules, 2017. Ministry of Health and Family Welfare, Government of India. Retrieved from https://cdsco.gov.in/opencms/resources/UploadCDSCOWeb/2022/m_device/Medical%20Devices%20Rules,%202017.pdf
+
+Ministry of Electronics and Information Technology. (2023). Digital Personal Data Protection Act, 2023. Government of India. Retrieved from https://digitalindia.gov.in
+
+U.S. Food and Drug Administration. (2021). Software as a Medical Device (SaMD). Retrieved from https://www.fda.gov/medical-devices/digital-health-center-excellence/software-medical-device-samd
