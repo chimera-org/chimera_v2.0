@@ -1,4 +1,4 @@
-# Chimera Clinical Advisory Board Charter (Enhanced Version)
+# Chimera Clinical Advisory Board Charter (US Edition)
 
 <div align="center">
 <img src="https://img.shields.io/badge/-%F0%9F%A7%A0%20CHIMERA%20CLINICAL%20ADVISORY%20BOARD%20%F0%9F%A6%BE-6236FF?style=for-the-badge&labelColor=1A1A2E" alt="Chimera Clinical Advisory Board"/>
