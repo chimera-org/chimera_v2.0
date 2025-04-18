@@ -18,7 +18,7 @@ The Chimera Clinical Advisory Board (CAB) is a cornerstone of our regulatory and
 
 The CAB will play a critical role in ensuring that the Chimera platform meets the highest standards of clinical efficacy, safety, and ethical implementation while navigating the complex regulatory landscape for novel neurotechnology devices. Through strategic guidance on clinical trial design, regulatory pathways, safety monitoring, and technology assessment, the CAB will accelerate our path to market while maximizing clinical impact and commercial success.
 
-This charter defines the CAB's purpose, responsibilities, membership requirements, operational procedures, and governance structure, establishing a framework for leveraging expert insights to achieve our billion-dollar market potential.
+This charter defines the CAB's purpose, responsibilities, membership requirements, operational procedures, and governance structure, establishing a framework for leveraging expert insights to achieve our market potential.
 
 ## 2. Purpose and Scope
 
