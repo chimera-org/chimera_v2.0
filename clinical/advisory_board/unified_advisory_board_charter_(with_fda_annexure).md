@@ -1,9 +1,9 @@
-# Chimera Clinical Advisory Board Charter (Indian Edition with FDA Annexure)
+# Chimera Clinical Advisory Board Charter (with FDA Annexure)
 
 <div align="center">
 <img src="https://img.shields.io/badge/-%F0%9F%A7%A0%20CHIMERA%20CLINICAL%20ADVISORY%20BOARD%20%F0%9F%A6%BE-6236FF?style=for-the-badge&labelColor=1A1A2E" alt="Chimera Clinical Advisory Board"/>
 
-**Guiding the Future of Brain-Controlled Exoskeleton Technology for Home Use in India**
+**Guiding the Future of Brain-Controlled Exoskeleton Technology for Home Use**
 
 *Version 3.0 | Effective Date: April 2025*
 
