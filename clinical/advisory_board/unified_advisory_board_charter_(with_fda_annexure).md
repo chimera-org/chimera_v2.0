@@ -438,29 +438,37 @@ The CAB will prioritize diversity across multiple dimensions:
 * Quarterly full-board meetings (4 per year)
 * Ad-hoc subcommittee meetings as needed
 * Annual in-person strategic planning meeting
-* Virtual meeting platform for regular sessions
+* Virtual meetings conducted via secure videoconference platform for regular sessions
 * Option for hybrid meetings with both in-person and virtual attendance
-* Emergency meetings may be called with 72-hour notice
+* Emergency meetings may be called by CAB Chair, Chimera CMO, and request of majority of CAB members with 72-hour notice
 * Meeting schedule established annually in advance
 * Regional satellite meetings when appropriate for geographic convenience
 * Special topic workshops scheduled as needed
 
 ### 5.2 Meeting Structure
 
-* Standard agenda includes:
-  * Safety updates and adverse event review
-  * Clinical study progress reports
-  * Regulatory submission planning/updates
-  * Technology development milestones
-  * Emerging issues and strategic considerations
-* Pre-meeting materials distributed 1 week in advance
-* Meeting minutes circulated within 1 week after meeting
-* Action items tracked with assigned responsibilities and deadlines
-* Executive summaries provided to company leadership
-* Structured discussion format to ensure all voices are heard
-* Time allocated for open discussion and new ideas
-* Regular review of progress against strategic objectives
-* Periodic deep-dive sessions on critical topics
+- **Agenda Development**
+  - Draft agenda distributed 3 weeks before meeting
+  - Members may suggest agenda items up to 2 weeks before meeting
+  - Final agenda distributed 1 week before meeting
+  - Standing agenda items include safety updates, regulatory developments, and clinical progress
+
+- **Meeting Materials**
+  - Distributed at least 1 week before meeting
+  - Pre-read materials clearly identified
+  - Confidentiality maintained for all materials
+
+- **Meeting Conduct**
+  - Chaired by CAB Chairperson
+  - Structured discussion with equal opportunity for input
+  - Formal recommendations documented
+  - Voting when necessary (simple majority)
+
+- **Documentation**
+  - Minutes prepared within 1 week
+  - Review and approval of minutes by members
+  - Action items tracked with owners and deadlines
+  - Formal recommendations documented with rationale
 
 ### 5.3 Decision-Making Process
 
