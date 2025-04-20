@@ -657,7 +657,7 @@ pre-commit install</code></pre>
   <tr>
     <td width="50%" align="center">
       <h3>Project Team</h3>
-      <p><b>Project Lead:</b> Dr. Aisha Patel<br><a href="mailto:aisha.patel@chimera-bci.org">aisha.patel@chimera-bci.org</a></p>
+      <p><b>Project Lead:</b> Vyom Mallick<br><a href="mailto:vyommallick@gmail.com">vyommallick@gmail.com</a></p>
       <p><b>Technical Support:</b><br><a href="mailto:support@chimera-bci.org">support@chimera-bci.org</a></p>
     </td>
     <td width="50%" align="center">
