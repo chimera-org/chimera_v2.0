@@ -762,5 +762,4 @@ Document No: GOV-FRAMEWORK-002 | Version: 2.0.0 | April 2025</p>
 [![ISO 13485](https://img.shields.io/badge/ISO%2013485-Compliant-blue?style=flat-square)](https://www.iso.org/standard/59752.html)
 [![CDSCO](https://img.shields.io/badge/CDSCO-MDR%202017-orange?style=flat-square)](https://cdsco.gov.in/opencms/opencms/en/Medical-Device-Diagnostics/Medical-Device-Diagnostics/)
 [![Home Use](https://img.shields.io/badge/Home%20Use-Certified-blue?style=flat-square)](https://www.iso.org/standard/60601-1-11.html)
-[![Billion Dollar](https://img.shields.io/badge/Funding-Billion%20Dollar%20Ready-gold?style=flat-square)](https://github.com/chimera-org/chimera_v2.0)
 </div>
