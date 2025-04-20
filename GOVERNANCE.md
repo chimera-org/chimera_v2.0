@@ -13,7 +13,6 @@
 [![Make in India](https://img.shields.io/badge/Make%20in%20India-Initiative-orange?style=flat-square)](https://www.makeinindia.com/)
 [![ISO 13485](https://img.shields.io/badge/ISO%2013485-Compliant-blue?style=flat-square)](https://www.iso.org/standard/59752.html)
 [![Home Use](https://img.shields.io/badge/Home%20Use-Certified-blue?style=flat-square)](https://www.iso.org/standard/60601-1-11.html)
-[![Billion Dollar](https://img.shields.io/badge/Funding-Billion%20Dollar%20Ready-gold?style=flat-square)](https://github.com/chimera-org/chimera_v2.0)
 
 </div>
 
