@@ -913,37 +913,37 @@ pre-commit install</code></pre>
     <th>Description</th>
   </tr>
   <tr>
-    <td><b>Q2 2025</b></td>
+    <td><b>Q2 202X</b></td>
     <td>Enhanced Transfer Learning</td>
     <td>Improved cross-subject and cross-session adaptation capabilities</td>
   </tr>
   <tr>
-    <td><b>Q3 2025</b></td>
+    <td><b>Q3 202X</b></td>
     <td>Real-time Adaptive Algorithms</td>
     <td>Algorithms that adapt to changing brain signals during use</td>
   </tr>
   <tr>
-    <td><b>Q4 2025</b></td>
+    <td><b>Q4 202X</b></td>
     <td>Multi-modal Integration</td>
     <td>Combined EEG + EMG signal processing for improved control</td>
   </tr>
   <tr>
-    <td><b>Q1 2026</b></td>
+    <td><b>Q1 202X</b></td>
     <td>Expanded Hardware Support</td>
     <td>Support for additional EEG devices and exoskeleton platforms</td>
   </tr>
   <tr>
-    <td><b>Q2 2026</b></td>
+    <td><b>Q2 202X</b></td>
     <td>Advanced Personalization</td>
     <td>Framework for personalized model adaptation</td>
   </tr>
   <tr>
-    <td><b>Q3 2026</b></td>
+    <td><b>Q3 202X</b></td>
     <td>Federated Learning</td>
     <td>Privacy-preserving distributed learning implementation</td>
   </tr>
   <tr>
-    <td><b>Q4 2026</b></td>
+    <td><b>Q4 202X</b></td>
     <td>Regulatory Submission</td>
     <td>Complete package for FDA and CDSCO submissions</td>
   </tr>
@@ -958,26 +958,26 @@ pre-commit install</code></pre>
 <div style="display: flex; flex-direction: column; gap: 15px;">
   <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e1e4e8;">
     <h3>Adaptive EEG decoding for robust BCI control</h3>
-    <p><b>Authors:</b> Smith J, et al. (2024)</p>
-    <p><b>Journal:</b> IEEE Transactions on Neural Systems and Rehabilitation Engineering, 32(4), 823-835</p>
-    <p><b>Abstract:</b> This paper presents a novel approach to adaptive EEG decoding that improves robustness in brain-computer interface control for exoskeleton applications.</p>
-    <a href="#"><img src="https://img.shields.io/badge/DOI-10.1109%2FTNSRE.2024.1234567-blue?style=flat-square" alt="DOI"/></a>
+    <p><b>Authors:</b> (Authors name, Year)</p>
+    <p><b>Journal:</b> (Journal's name, volume number-issue number, page range/article identification number)</p>
+    <p><b>Abstract:</b> (One line abstract)</p>
+    <a href="#"><img src="https://img.shields.io/badge/DOI-xx.xxxx%xxxxx.xxxx.xxxxx-blue?style=flat-square" alt="DOI"/></a>
   </div>
   
   <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e1e4e8;">
     <h3>Transfer learning approaches for cross-session BCI calibration</h3>
-    <p><b>Authors:</b> Patel R, et al. (2024)</p>
-    <p><b>Journal:</b> Journal of Neural Engineering, 21(2), 026001</p>
-    <p><b>Abstract:</b> This study explores various transfer learning techniques to reduce calibration time in multi-session BCI use for exoskeleton control.</p>
-    <a href="#"><img src="https://img.shields.io/badge/DOI-10.1088%2F1741--2552%2Fabc123-blue?style=flat-square" alt="DOI"/></a>
+    <p><b>Authors:</b> (Authors name, Year)</p>
+    <p><b>Journal:</b> (Journal's name, volume number-issue number, page range/article identification number)</p>
+    <p><b>Abstract:</b> (One line abstract)</p>
+    <a href="#"><img src="https://img.shields.io/badge/DOI-xx.xxxx%xxxxx.xxxx.xxxxx-blue?style=flat-square" alt="DOI"/></a>
   </div>
   
   <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e1e4e8;">
     <h3>Real-time artifact rejection in EEG-based BCI systems</h3>
-    <p><b>Authors:</b> Kumar A, et al. (2023)</p>
-    <p><b>Journal:</b> Frontiers in Neuroscience, 17, 1023546</p>
-    <p><b>Abstract:</b> A novel approach to real-time artifact rejection that improves signal quality in EEG-based brain-computer interfaces for exoskeleton control.</p>
-    <a href="#"><img src="https://img.shields.io/badge/DOI-10.3389%2Ffnins.2023.1023546-blue?style=flat-square" alt="DOI"/></a>
+    <p><b>Authors:</b> (Authors name, Year)</p>
+    <p><b>Journal:</b> (Journal's name, volume number-issue number, page range/article identification number)</p>
+    <p><b>Abstract:</b> (One line abstract)</p>
+    <a href="#"><img src="https://img.shields.io/badge/DOI-xx.xxxx%xxxxx.xxxx.xxxxx-blue?style=flat-square" alt="DOI"/></a>
   </div>
 </div>
 
