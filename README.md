@@ -957,7 +957,7 @@ pre-commit install</code></pre>
 
 <div style="display: flex; flex-direction: column; gap: 15px;">
   <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e1e4e8;">
-    <h3>Adaptive EEG decoding for robust BCI control</h3>
+    <h3>Paper Title</h3>
     <p><b>Authors:</b> (Authors name, Year)</p>
     <p><b>Journal:</b> (Journal's name, volume number-issue number, page range/article identification number)</p>
     <p><b>Abstract:</b> (One line abstract)</p>
@@ -965,7 +965,7 @@ pre-commit install</code></pre>
   </div>
   
   <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e1e4e8;">
-    <h3>Transfer learning approaches for cross-session BCI calibration</h3>
+    <h3>Paper Title</h3>
     <p><b>Authors:</b> (Authors name, Year)</p>
     <p><b>Journal:</b> (Journal's name, volume number-issue number, page range/article identification number)</p>
     <p><b>Abstract:</b> (One line abstract)</p>
@@ -973,7 +973,7 @@ pre-commit install</code></pre>
   </div>
   
   <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e1e4e8;">
-    <h3>Real-time artifact rejection in EEG-based BCI systems</h3>
+    <h3>Paper Title</h3>
     <p><b>Authors:</b> (Authors name, Year)</p>
     <p><b>Journal:</b> (Journal's name, volume number-issue number, page range/article identification number)</p>
     <p><b>Abstract:</b> (One line abstract)</p>
