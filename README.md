@@ -229,37 +229,413 @@
   <tr>
     <td>
       <pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow: auto; max-height: 400px;">
-/chimera_v2.0/
-├── 📂 src/                      <span style="color: #98c379;">// Core source code</span>
-│   └── 📂 chimera/              <span style="color: #98c379;">// Main package</span>
-│       ├── 📂 data/             <span style="color: #98c379;">// Data handling modules</span>
-│       ├── 📂 processing/       <span style="color: #98c379;">// Signal processing</span>
-│       ├── 📂 features/         <span style="color: #98c379;">// Feature extraction</span>
-│       ├── 📂 models/           <span style="color: #98c379;">// ML model implementations</span>
-│       ├── 📂 training/         <span style="color: #98c379;">// Training logic</span>
-│       ├── 📂 evaluation/       <span style="color: #98c379;">// Evaluation metrics</span>
-│       ├── 📂 inference/        <span style="color: #98c379;">// Inference with monitoring</span>
-│       ├── 📂 deployment/       <span style="color: #98c379;">// Deployment utilities</span>
-│       └── 📂 utils/            <span style="color: #98c379;">// Shared utilities</span>
-├── 📂 tests/                    <span style="color: #98c379;">// Automated tests</span>
-├── 📂 docs/                     <span style="color: #98c379;">// Documentation</span>
-├── 📂 regulatory/               <span style="color: #98c379;">// Regulatory compliance</span>
-├── 📂 clinical/                 <span style="color: #98c379;">// Clinical validation</span>
-├── 📂 quality/                  <span style="color: #98c379;">// Quality management</span>
-├── 📂 security/                 <span style="color: #98c379;">// Security framework</span>
-├── 📂 architecture/             <span style="color: #98c379;">// Architecture documentation</span>
-├── 📂 data/                     <span style="color: #98c379;">// Data with governance</span>
-├── 📂 models/                   <span style="color: #98c379;">// Model artifacts & documentation</span>
-├── 📂 notebooks/                <span style="color: #98c379;">// Jupyter notebooks</span>
-├── 📂 scripts/                  <span style="color: #98c379;">// Runnable scripts</span>
-├── 📂 config/                   <span style="color: #98c379;">// Configuration files</span>
-├── 📂 benchmarks/               <span style="color: #98c379;">// Performance benchmarking</span>
-├── 📂 deployment/               <span style="color: #98c379;">// Deployment pipeline</span>
-└── 📂 research/                 <span style="color: #98c379;">// Research collaboration</span>
+```
+chimera_v2.0/
+├── 📂 .github/                          # GitHub Actions & CI/CD workflows
+│   ├── 📂 workflows/                    # Automated workflow definitions
+│   │   ├── 📄 codeql.yml               # Code quality analysis
+│   │   ├── 📄 ci.yml                   # Continuous integration pipeline
+│   │   └── 📄 security-scan.yml        # Security vulnerability scanning
+│   ├── 📄 ISSUE_TEMPLATE.md            # Issue reporting templates
+│   └── 📄 PULL_REQUEST_TEMPLATE.md     # Pull request guidelines
+│
+├── 📂 architecture/                     # System architecture documentation
+│   ├── 📂 diagrams/                    # Architecture diagrams and flowcharts
+│   ├── 📂 specifications/              # Technical specifications
+│   ├── 📄 api_design_guide.md          # API design principles and standards
+│   ├── 📄 system_overview.md           # High-level system architecture
+│   └── 📄 integration_patterns.md      # Integration and communication patterns
+│
+├── 📂 benchmarks/                       # Performance benchmarking suite
+│   ├── 📂 datasets/                    # Benchmark datasets
+│   ├── 📂 results/                     # Benchmark results and comparisons
+│   ├── 📂 scripts/                     # Benchmarking automation scripts
+│   └── 📄 performance_metrics.md       # Performance evaluation criteria
+│
+├── 📂 clinical/                         # Clinical validation and trials
+│   ├── 📂 advisory_board/              # Advisory board documentation
+│   │   ├── 📄 charter.md               # Board charter and responsibilities
+│   │   ├── 📄 meeting_minutes/         # Board meeting records
+│   │   └── 📄 recommendations.md       # Clinical recommendations
+│   ├── 📂 data_collection/             # Clinical data collection protocols
+│   │   ├── 📂 protocols/               # Data collection procedures
+│   │   ├── 📂 forms/                   # Clinical assessment forms
+│   │   └── 📂 guidelines/              # Data collection guidelines
+│   ├── 📂 ethics/                      # Ethics and IRB documentation
+│   │   ├── 📄 irb_approval.pdf         # Institutional Review Board approval
+│   │   ├── 📄 consent_forms.pdf        # Patient consent documentation
+│   │   └── 📄 ethics_framework.md      # Research ethics guidelines
+│   ├── 📂 protocols/                   # Clinical trial protocols
+│   │   ├── 📄 study_design.md          # Clinical study design
+│   │   ├── 📄 inclusion_criteria.md    # Patient inclusion/exclusion criteria
+│   │   └── 📄 outcome_measures.md      # Primary and secondary outcomes
+│   ├── 📂 validation/                  # Clinical validation studies
+│   │   ├── 📂 pilot_studies/           # Pilot study results
+│   │   ├── 📂 efficacy_trials/         # Efficacy validation trials
+│   │   └── 📂 safety_studies/          # Safety assessment studies
+│   └── 📄 clinical_overview.md         # Clinical program overview
+│
+├── 📂 config/                          # Configuration management
+│   ├── 📂 experiments/                 # Experiment configurations
+│   │   ├── 📄 experiment_01.yaml       # Motor imagery experiment config
+│   │   ├── 📄 experiment_02.yaml       # Cross-subject validation config
+│   │   └── 📄 baseline_config.yaml     # Baseline experiment parameters
+│   ├── 📂 models/                      # Model configuration files
+│   │   ├── 📄 eegnet_config.yaml       # EEGNet model parameters
+│   │   ├── 📄 lda_config.yaml          # Linear Discriminant Analysis config
+│   │   └── 📄 svm_config.yaml          # Support Vector Machine config
+│   ├── 📂 deployment/                  # Deployment configurations
+│   │   ├── 📄 production.yaml          # Production environment config
+│   │   ├── 📄 staging.yaml             # Staging environment config
+│   │   └── 📄 development.yaml         # Development environment config
+│   └── 📄 default_config.yaml          # Default system configuration
+│
+├── 📂 data/                            # Data management and governance
+│   ├── 📂 01_raw/                      # Raw EEG data (DVC tracked)
+│   │   ├── 📂 subject-001/             # Individual subject data
+│   │   │   ├── 📂 session_01/          # Recording session data
+│   │   │   │   ├── 📄 eeg_data.fif     # Raw EEG recordings
+│   │   │   │   ├── 📄 events.txt       # Event markers
+│   │   │   │   └── 📄 metadata.json    # Session metadata
+│   │   │   └── 📂 session_02/          # Additional sessions
+│   │   ├── 📂 subject-002/             # Additional subjects
+│   │   └── 📂 calibration/             # System calibration data
+│   ├── 📂 02_processed/                # Preprocessed data
+│   │   ├── 📂 filtered/                # Filtered EEG signals
+│   │   ├── 📂 artifacts_removed/       # Artifact-cleaned data
+│   │   └── 📂 epoched/                 # Epoched trial data
+│   ├── 📂 03_features/                 # Extracted features
+│   │   ├── 📂 csp_features/            # Common Spatial Pattern features
+│   │   ├── 📂 psd_features/            # Power Spectral Density features
+│   │   └── 📂 time_domain/             # Time domain features
+│   ├── 📂 04_datasets/                 # ML-ready datasets
+│   │   ├── 📂 training/                # Training datasets
+│   │   ├── 📂 validation/              # Validation datasets
+│   │   └── 📂 testing/                 # Test datasets
+│   ├── 📂 governance/                  # Data governance documentation
+│   │   ├── 📄 data_dictionary.md       # Data field definitions
+│   │   ├── 📄 privacy_policy.md        # Data privacy guidelines
+│   │   └── 📄 retention_policy.md      # Data retention policies
+│   └── 📄 data_quality_metrics.md      # Data quality assessment
+│
+├── 📂 deployment/                      # Deployment infrastructure
+│   ├── 📂 embedded/                    # Embedded system deployment
+│   │   ├── 📄 ci_cd_pipeline.yml       # Embedded CI/CD pipeline
+│   │   ├── 📄 verification.md          # Deployment verification
+│   │   └── 📂 firmware/                # Firmware deployment scripts
+│   ├── 📂 hardware_integration/        # Hardware integration scripts
+│   │   ├── 📂 exoskeleton/             # Exoskeleton integration
+│   │   ├── 📂 eeg_devices/             # EEG device interfaces
+│   │   └── 📂 communication/           # Device communication protocols
+│   ├── 📂 ota_updates/                 # Over-the-air update system
+│   │   ├── 📂 update_packages/         # Update package management
+│   │   ├── 📂 rollback/                # Rollback mechanisms
+│   │   └── 📄 update_protocol.md       # Update deployment protocol
+│   ├── 📂 cloud/                       # Cloud deployment configurations
+│   │   ├── 📄 docker-compose.yml       # Docker containerization
+│   │   ├── 📄 kubernetes.yaml          # Kubernetes deployment
+│   │   └── 📂 terraform/               # Infrastructure as code
+│   └── 📄 deployment_guide.md          # Deployment documentation
+│
+├── 📂 docs/                            # Comprehensive documentation
+│   ├── 📂 _static/                     # Static documentation assets
+│   │   ├── 📂 images/                  # Documentation images
+│   │   ├── 📂 css/                     # Custom styling
+│   │   └── 📂 js/                      # Interactive elements
+│   ├── 📂 api/                         # API documentation
+│   │   ├── 📄 endpoints.md             # API endpoint reference
+│   │   ├── 📄 authentication.md        # Authentication methods
+│   │   └── 📄 examples.md              # API usage examples
+│   ├── 📂 developer_guides/            # Developer documentation
+│   │   ├── 📄 getting_started.md       # Quick start guide
+│   │   ├── 📄 contributing.md          # Contribution guidelines
+│   │   ├── 📄 coding_standards.md      # Code style guidelines
+│   │   └── 📄 testing_guide.md         # Testing best practices
+│   ├── 📂 troubleshooting/             # Troubleshooting guides
+│   │   ├── 📄 common_issues.md         # Frequently encountered issues
+│   │   ├── 📄 debugging_guide.md       # Debugging procedures
+│   │   └── 📄 error_codes.md           # Error code reference
+│   ├── 📂 user_guides/                 # End-user documentation
+│   │   ├── 📄 installation.md          # Installation instructions
+│   │   ├── 📄 configuration.md         # Configuration guide
+│   │   └── 📄 operation_manual.md      # Operation procedures
+│   ├── 📄 architecture.md              # System architecture overview
+│   ├── 📄 data.md                      # Data handling documentation
+│   ├── 📄 deployment.md                # Deployment procedures
+│   ├── 📄 index.md                     # Documentation index
+│   ├── 📄 models.md                    # Model documentation
+│   └── 📄 usage_guide.md               # Usage instructions
+│
+├── 📂 models/                          # ML models and artifacts
+│   ├── 📂 classifiers/                 # Trained classification models
+│   │   ├── 📄 eeg_cnn_v1_final.h5      # CNN model for EEG classification
+│   │   ├── 📄 lda_subject001_session02.pkl # Subject-specific LDA model
+│   │   ├── 📄 svm_motor_imagery.pkl    # SVM for motor imagery
+│   │   └── 📄 ensemble_model.pkl       # Ensemble classification model
+│   ├── 📂 documentation/               # Model documentation
+│   │   ├── 📂 model_cards/             # Model performance cards
+│   │   │   ├── 📄 eeg_cnn_v1.md        # CNN model card
+│   │   │   ├── 📄 lda_baseline.md      # LDA baseline model card
+│   │   │   └── 📄 ensemble_v2.md       # Ensemble model documentation
+│   │   ├── 📂 performance_reports/     # Model performance analysis
+│   │   │   ├── 📄 cross_validation.md  # Cross-validation results
+│   │   │   ├── 📄 subject_transfer.md  # Transfer learning analysis
+│   │   │   └── 📄 real_time_performance.md # Real-time inference metrics
+│   │   └── 📄 limitations.md           # Model limitations and constraints
+│   ├── 📂 signal_processing/           # Signal processing models
+│   │   ├── 📄 ica_subject001_weights.fif # ICA artifact removal weights
+│   │   ├── 📄 csp_filters.pkl          # Common Spatial Pattern filters
+│   │   └── 📄 bandpass_coefficients.pkl # Digital filter coefficients
+│   ├── 📂 checkpoints/                 # Training checkpoints
+│   │   ├── 📂 eegnet/                  # EEGNet training checkpoints
+│   │   ├── 📂 lstm/                    # LSTM model checkpoints
+│   │   └── 📂 transformer/             # Transformer model checkpoints
+│   └── 📄 model_registry.json          # Model version registry
+│
+├── 📂 notebooks/                       # Jupyter notebooks for analysis
+│   ├── 📂 exploratory/                 # Exploratory data analysis
+│   │   ├── 📄 data_exploration.ipynb   # Initial data exploration
+│   │   ├── 📄 signal_visualization.ipynb # EEG signal visualization
+│   │   └── 📄 feature_analysis.ipynb   # Feature importance analysis
+│   ├── 📂 experiments/                 # Experimental notebooks
+│   │   ├── 📄 baseline_models.ipynb    # Baseline model experiments
+│   │   ├── 📄 hyperparameter_tuning.ipynb # Model optimization
+│   │   └── 📄 cross_subject_validation.ipynb # Cross-subject studies
+│   ├── 📂 tutorials/                   # Educational notebooks
+│   │   ├── 📄 eeg_preprocessing.ipynb  # EEG preprocessing tutorial
+│   │   ├── 📄 feature_extraction.ipynb # Feature extraction guide
+│   │   └── 📄 model_training.ipynb     # Model training tutorial
+│   └── 📄 template.ipynb               # Notebook template
+│
+├── 📂 quality/                         # Quality assurance framework
+│   ├── 📂 testing/                     # Testing infrastructure
+│   │   ├── 📂 unit_tests/              # Unit test suites
+│   │   ├── 📂 integration_tests/       # Integration testing
+│   │   ├── 📂 performance_tests/       # Performance benchmarks
+│   │   └── 📂 regression_tests/        # Regression test suites
+│   ├── 📂 code_review/                 # Code review guidelines
+│   │   ├── 📄 review_checklist.md      # Code review checklist
+│   │   ├── 📄 style_guide.md           # Code style guidelines
+│   │   └── 📄 best_practices.md        # Development best practices
+│   ├── 📂 metrics/                     # Quality metrics tracking
+│   │   ├── 📄 code_coverage.md         # Test coverage reports
+│   │   ├── 📄 complexity_metrics.md    # Code complexity analysis
+│   │   └── 📄 technical_debt.md        # Technical debt tracking
+│   └── 📄 quality_standards.md         # Quality assurance standards
+│
+├── 📂 regulatory/                      # Regulatory compliance documentation
+│   ├── 📂 fda/                         # FDA compliance materials
+│   │   ├── 📄 510k_submission.md       # 510(k) premarket submission
+│   │   ├── 📄 samd_classification.md   # Software as Medical Device classification
+│   │   ├── 📄 clinical_evaluation.md   # Clinical evaluation report
+│   │   └── 📄 predicate_analysis.md    # Predicate device analysis
+│   ├── 📂 iso_standards/               # ISO standard compliance
+│   │   ├── 📄 iso_14971_risk_management.md # Risk management standard
+│   │   ├── 📄 iso_13485_qms.md         # Quality management system
+│   │   ├── 📄 iso_62304_software.md    # Medical device software standard
+│   │   └── 📄 iso_27001_security.md    # Information security standard
+│   ├── 📂 international/               # International regulatory compliance
+│   │   ├── 📄 ce_marking.md            # European CE marking
+│   │   ├── 📄 health_canada.md         # Health Canada requirements
+│   │   └── 📄 cdsco_india.md           # Indian regulatory compliance
+│   ├── 📄 risk_controls.md             # Risk control measures
+│   ├── 📄 validation_protocols.md      # Validation and verification protocols
+│   └── 📄 regulatory_strategy.md       # Overall regulatory strategy
+│
+├── 📂 research/                        # Research collaboration and publications
+│   ├── 📂 publications/                # Research publications
+│   │   ├── 📂 papers/                  # Published research papers
+│   │   ├── 📂 conferences/             # Conference presentations
+│   │   ├── 📂 patents/                 # Patent applications
+│   │   └── 📂 preprints/               # Preprint manuscripts
+│   ├── 📂 collaborations/              # Research collaborations
+│   │   ├── 📂 academic_partners/       # University partnerships
+│   │   ├── 📂 industry_partners/       # Industry collaborations
+│   │   └── 📂 clinical_sites/          # Clinical research sites
+│   ├── 📂 datasets/                    # Research datasets
+│   │   ├── 📂 public_datasets/         # Publicly available datasets
+│   │   ├── 📂 synthetic_data/          # Synthetic data generation
+│   │   └── 📂 benchmark_datasets/      # Standardized benchmarks
+│   ├── 📄 research_roadmap.md          # Research development roadmap
+│   └── 📄 ethics_framework.md          # Research ethics guidelines
+│
+├── 📂 scripts/                         # Automation and utility scripts
+│   ├── 📂 data_processing/             # Data processing automation
+│   │   ├── 📄 preprocess_eeg.py        # EEG preprocessing pipeline
+│   │   ├── 📄 extract_features.py      # Feature extraction script
+│   │   └── 📄 create_datasets.py       # Dataset creation automation
+│   ├── 📂 training/                    # Model training scripts
+│   │   ├── 📄 train_eegnet.py          # EEGNet training script
+│   │   ├── 📄 train_lda.py             # LDA training script
+│   │   ├── 📄 hyperparameter_search.py # Automated hyperparameter tuning
+│   │   └── 📄 tune_hyperparameters.py  # Hyperparameter optimization
+│   ├── 📂 evaluation/                  # Model evaluation scripts
+│   │   ├── 📄 evaluate_models.py       # Model performance evaluation
+│   │   ├── 📄 cross_validation.py      # Cross-validation analysis
+│   │   └── 📄 statistical_tests.py     # Statistical significance testing
+│   ├── 📂 deployment/                  # Deployment automation
+│   │   ├── 📄 deploy_model.py          # Model deployment script
+│   │   ├── 📄 health_check.py          # System health monitoring
+│   │   └── 📄 backup_restore.py        # Data backup and restore
+│   └── 📂 utilities/                   # General utility scripts
+│       ├── 📄 data_validation.py       # Data integrity validation
+│       ├── 📄 system_diagnostics.py    # System diagnostic tools
+│       └── 📄 performance_monitor.py   # Performance monitoring
+│
+├── 📂 security/                        # Security framework and policies
+│   ├── 📂 policies/                    # Security policies
+│   │   ├── 📄 access_control.md        # Access control policies
+│   │   ├── 📄 data_protection.md       # Data protection guidelines
+│   │   ├── 📄 incident_response.md     # Security incident response
+│   │   └── 📄 vulnerability_management.md # Vulnerability management
+│   ├── 📂 threat_modeling/             # Security threat analysis
+│   │   ├── 📄 threat_assessment.md     # Threat landscape analysis
+│   │   ├── 📄 attack_vectors.md        # Potential attack vectors
+│   │   └── 📄 mitigation_strategies.md # Security mitigation measures
+│   ├── 📂 compliance/                  # Security compliance
+│   │   ├── 📄 hipaa_compliance.md      # HIPAA privacy compliance
+│   │   ├── 📄 gdpr_compliance.md       # GDPR data protection
+│   │   └── 📄 cybersecurity_framework.md # Cybersecurity standards
+│   ├── 📄 security_policy.md           # Overall security policy
+│   └── 📄 security_architecture.md     # Security architecture design
+│
+├── 📂 src/                             # Core source code
+│   └── 📂 chimera/                     # Main Python package
+│       ├── 📂 data/                    # Data handling and loading
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 loaders.py           # Data loading utilities
+│       │   ├── 📄 validators.py        # Data validation functions
+│       │   └── 📄 transforms.py        # Data transformation utilities
+│       ├── 📂 processing/              # Signal processing modules
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 filters.py           # Digital filtering functions
+│       │   ├── 📄 artifacts.py         # Artifact removal algorithms
+│       │   ├── 📄 preprocessing.py     # EEG preprocessing pipeline
+│       │   └── 📄 quality_control.py   # Signal quality assessment
+│       ├── 📂 features/                # Feature extraction modules
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 spatial.py           # Spatial feature extraction (CSP)
+│       │   ├── 📄 spectral.py          # Spectral feature extraction (PSD)
+│       │   ├── 📄 temporal.py          # Temporal feature extraction
+│       │   └── 📄 connectivity.py      # Connectivity feature extraction
+│       ├── 📂 models/                  # ML model implementations
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 base.py              # Base model classes
+│       │   ├── 📄 classical.py         # Classical ML models (LDA, SVM)
+│       │   ├── 📄 deep_learning.py     # Deep learning models
+│       │   ├── 📄 ensemble.py          # Ensemble methods
+│       │   └── 📄 transfer_learning.py # Transfer learning utilities
+│       ├── 📂 training/                # Model training infrastructure
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 trainers.py          # Training loop implementations
+│       │   ├── 📄 optimizers.py        # Optimization algorithms
+│       │   ├── 📄 schedulers.py        # Learning rate schedulers
+│       │   └── 📄 callbacks.py         # Training callbacks
+│       ├── 📂 evaluation/              # Model evaluation modules
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 metrics.py           # Evaluation metrics
+│       │   ├── 📄 cross_validation.py  # Cross-validation utilities
+│       │   ├── 📄 statistical_tests.py # Statistical testing
+│       │   └── 📄 visualization.py     # Results visualization
+│       ├── 📂 inference/               # Real-time inference engine
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 predictor.py         # Real-time prediction engine
+│       │   ├── 📄 streaming.py         # Streaming data processing
+│       │   ├── 📄 monitoring.py        # Model performance monitoring
+│       │   └── 📄 safety_checks.py     # Safety validation checks
+│       ├── 📂 hardware/                # Hardware interface modules
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 eeg_interface.py     # EEG device communication
+│       │   ├── 📄 exoskeleton_control.py # Exoskeleton control interface
+│       │   ├── 📄 communication.py     # Device communication protocols
+│       │   └── 📄 hardware_interface.py # Generic hardware interface
+│       ├── 📂 deployment/              # Deployment utilities
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 model_server.py      # Model serving infrastructure
+│       │   ├── 📄 containerization.py  # Docker containerization
+│       │   ├── 📄 monitoring.py        # Deployment monitoring
+│       │   └── 📄 health_checks.py     # System health validation
+│       ├── 📂 utils/                   # Shared utility functions
+│       │   ├── 📄 __init__.py          # Package initialization
+│       │   ├── 📄 logging.py           # Logging configuration
+│       │   ├── 📄 config.py            # Configuration management
+│       │   ├── 📄 io_utils.py          # Input/output utilities
+│       │   ├── 📄 math_utils.py        # Mathematical utilities
+│       │   └── 📄 visualization.py     # Visualization utilities
+│       └── 📄 __init__.py              # Main package initialization
+│
+├── 📂 tests/                           # Comprehensive test suite
+│   ├── 📂 unit/                        # Unit tests
+│   │   ├── 📂 data/                    # Data module tests
+│   │   ├── 📂 processing/              # Processing module tests
+│   │   ├── 📂 features/                # Feature extraction tests
+│   │   ├── 📂 models/                  # Model implementation tests
+│   │   └── 📂 utils/                   # Utility function tests
+│   ├── 📂 integration/                 # Integration tests
+│   │   ├── 📂 pipeline/                # End-to-end pipeline tests
+│   │   ├── 📂 hardware/                # Hardware integration tests
+│   │   └── 📂 deployment/              # Deployment integration tests
+│   ├── 📂 performance/                 # Performance tests
+│   │   ├── 📂 benchmarks/              # Performance benchmarks
+│   │   ├── 📂 stress_tests/            # System stress testing
+│   │   └── 📂 load_tests/              # Load testing scenarios
+│   ├── 📂 fixtures/                    # Test data and fixtures
+│   │   ├── 📂 sample_data/             # Sample EEG data for testing
+│   │   ├── 📂 mock_models/             # Mock model implementations
+│   │   └── 📂 test_configs/            # Test configuration files
+│   ├── 📄 conftest.py                  # Pytest configuration
+│   └── 📄 test_requirements.txt        # Testing dependencies
+│
+├── 📄 .gitignore                       # Git ignore patterns
+├── 📄 .pre-commit-config.yaml          # Pre-commit hooks configuration
+├── 📄 .dvcignore                       # DVC ignore patterns
+├── 📄 pyproject.toml                   # Python project configuration
+├── 📄 poetry.lock                      # Poetry dependency lock file
+├── 📄 requirements.txt                 # Python dependencies
+├── 📄 environment.yml                  # Conda environment specification
+├── 📄 Dockerfile                       # Docker containerization
+├── 📄 docker-compose.yml               # Multi-container Docker setup
+├── 📄 Makefile                         # Build automation
+├── 📄 dvc.yaml                         # DVC pipeline configuration
+├── 📄 params.yaml                      # DVC parameters
+├── 📄 README.md                        # Project documentation
+├── 📄 LICENSE                          # Apache 2.0 license
+├── 📄 CHANGELOG.md                     # Version change history
+├── 📄 CONTRIBUTING.md                  # Contribution guidelines
+├── 📄 CODE_OF_CONDUCT.md               # Community code of conduct
+└── 📄 SECURITY.md                      # Security policy and reporting
+```
       </pre>
     </td>
   </tr>
 </table>
+
+---
+
+## 🏗️ Architecture Overview
+
+The repository follows a **modular, enterprise-grade architecture** designed for:
+
+- **🔬 Research & Development**: Comprehensive notebooks and experimental frameworks
+- **🏥 Clinical Validation**: Robust clinical trial infrastructure and regulatory compliance
+- **🚀 Production Deployment**: Scalable deployment pipelines and monitoring systems
+- **🔒 Security & Compliance**: Enterprise-level security and regulatory frameworks
+- **📊 Quality Assurance**: Comprehensive testing and quality management systems
+
+## 🎯 Key Directory Functions
+
+| Directory | Purpose | Key Features |
+|-----------|---------|--------------|
+| **`src/chimera/`** | Core ML platform | Modular BCI pipeline, real-time inference |
+| **`clinical/`** | Clinical validation | IRB protocols, advisory board, ethics framework |
+| **`regulatory/`** | Compliance framework | FDA 510(k), ISO standards, international regulations |
+| **`data/`** | Data management | DVC-tracked datasets, governance, quality metrics |
+| **`models/`** | ML artifacts | Trained models, documentation, performance reports |
+| **`deployment/`** | Production systems | Hardware integration, OTA updates, monitoring |
+| **`security/`** | Security framework | Threat modeling, compliance, incident response |
+| **`quality/`** | QA infrastructure | Testing suites, code review, metrics tracking |
+
+This structure ensures **scalability**, **maintainability**, and **regulatory compliance** while supporting both research innovation and production deployment.
 
 ---
 
