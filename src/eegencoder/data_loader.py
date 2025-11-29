@@ -4,9 +4,11 @@ Motor Imagery EEG Dataset Loader for EEGEncoder
 """
 
 import numpy as np
+import torch
 from pathlib import Path
 from mne.io import read_raw_gdf
 from mne import events_from_annotations, Epochs
+from torch.utils.data import Dataset, DataLoader
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -103,6 +105,26 @@ class BCIC4_2A_Loader:
         groups = np.concatenate(groups_list, axis=0)
         
         return X, y, groups
+
+# Legacy function for backward compatibility
+def get_dataloaders(data_path, subject_id, batch_size=32, is_training=True):
+    """
+    Legacy function - use get_loso_dataloaders() for LOSO cross-validation
+    Creates a simple DataLoader for a single subject
+    """
+    loader = BCIC4_2A_Loader(data_path)
+    X, y = loader.load_subject(subject_id, training=is_training)
+    
+    dataset = torch.utils.data.TensorDataset(
+        torch.FloatTensor(X), torch.LongTensor(y)
+    )
+    
+    dataloader = DataLoader(
+        dataset, batch_size=batch_size, shuffle=is_training,
+        num_workers=0, pin_memory=False
+    )
+    
+    return dataloader
 
 def verify_dataset(loader, subject_id=1):
     """Quick verification function"""
