@@ -1,6 +1,6 @@
 """
 BCI Competition IV 2a Data Loader
-With explicit shape debugging
+Handles dropped duplicate events
 """
 
 import numpy as np
@@ -14,7 +14,7 @@ class BCIC4_2A_Loader:
         self.data_path = data_path
         self.sfreq = 250
         self.n_channels = 22
-        self.n_trials = 288
+        self.n_trials = 288  # Expected, but actual may vary
         self.trial_length = 4
         
     def load_subject(self, subject_id, training=True):
@@ -36,9 +36,7 @@ class BCIC4_2A_Loader:
         mi_selector = np.isin(events[:, 2], mi_codes)
         mi_events_original = events[mi_selector]
         
-        print(f"  MI events found: {len(mi_events_original)}")
-        
-        # Create epochs
+        # Create epochs (some duplicates may be dropped)
         epochs = Epochs(raw, mi_events_original, event_id=None,
                        tmin=2.0, tmax=6.0, baseline=None,
                        preload=True, verbose=False,
@@ -49,23 +47,19 @@ class BCIC4_2A_Loader:
         # Map internal codes to labels
         code_to_label = {event_dict['769']:0, event_dict['770']:1, 
                         event_dict['771']:2, event_dict['772']:3}
-        y = np.array([code_to_label[code] for code in mi_events_original[:, 2]])
+        
+        # EXTRACT labels - but only for events that survived
+        # epochs.events contains the final events after dropping duplicates
+        y = np.array([code_to_label[code] for code in epochs.events[:, 2]])
         
         # Fix length
         if X.shape[2] == 1001:
             X = X[:, :, :1000]
         
-        # EXPLICIT DEBUG PRINTS
-        print(f"  DEBUG: X.shape = {X.shape}")
-        print(f"  DEBUG: Expected shape = ({self.n_trials}, {self.n_channels}, {self.sfreq * self.trial_length})")
-        print(f"  DEBUG: y.shape = {y.shape}")
-        print(f"  DEBUG: Expected trials = {self.n_trials}")
-        
-        # RELAXED ASSERTION
-        # Allow trial count to vary (some subjects have fewer due to artifacts)
-        assert X.shape[1] == self.n_channels, f"Channel mismatch! Got {X.shape[1]}, expected {self.n_channels}"
-        assert X.shape[2] == self.sfreq * self.trial_length, f"Time mismatch! Got {X.shape[2]}, expected {self.sfreq * self.trial_length}"
-        assert len(y) == X.shape[0], "X and y length mismatch!"
+        # Final verification (no strict trial count)
+        assert X.shape[1] == self.n_channels
+        assert X.shape[2] == self.sfreq * self.trial_length
+        assert len(y) == X.shape[0]  # Must match after trimming
         
         print(f"  ✅ SUCCESS: X={X.shape}, labels={np.bincount(y)}")
         return X, y
