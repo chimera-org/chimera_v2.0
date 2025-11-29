@@ -1,6 +1,6 @@
 """
 BCI Competition IV 2a Data Loader
-Fixed inst.pick() API and robust event filtering
+Correct string-based event handling throughout
 """
 
 import numpy as np
@@ -22,31 +22,33 @@ class BCIC4_2A_Loader:
         filename = f"{self.data_path}A{subject_id:02d}{suffix}.gdf"
         
         raw = read_raw_gdf(filename, preload=True, verbose=False)
-        
-        # FIXED: Use inst.pick() instead of pick_channels()
         raw.pick(raw.ch_names[:self.n_channels])
-        
         raw.filter(l_freq=4, h_freq=38, method='iir', verbose=False)
         
-        # Get all events
+        # Get events and mapping
         events, event_dict = events_from_annotations(raw, verbose=False)
         
-        # Filter motor imagery events (internal codes 7,8,9,10)
-        mi_events = events[np.isin(events[:, 2], [7, 8, 9, 10])]
+        # DEBUG
+        print(f"  Event mapping: {event_dict}")
         
-        # Create epochs with MI events only
-        epochs = Epochs(raw, mi_events, event_id={7:1, 8:2, 9:3, 10:4},
+        # Use string-based event_id (MNE requires this for GDF)
+        event_id = {
+            '769': 0,  # left_hand → label 0
+            '770': 1,  # right_hand → label 1
+            '771': 2,  # foot → label 2
+            '772': 3   # tongue → label 3
+        }
+        
+        # Create epochs - MNE maps strings to internal codes automatically
+        epochs = Epochs(raw, events, event_id=event_id,
                        tmin=2.0, tmax=6.0, baseline=None,
                        preload=True, verbose=False,
                        event_repeated='drop')
         
         X = epochs.get_data()
+        y = epochs.events[:, -1]  # Already 0-3 from event_id mapping
         
-        # Map internal codes to labels 0-3
-        event_code_to_label = {7:0, 8:1, 9:2, 10:3}
-        y = np.array([event_code_to_label[e] for e in epochs.events[:, 2]])
-        
-        # Trim to exactly 1000 samples (4s @ 250Hz)
+        # Fix length
         if X.shape[2] == 1001:
             X = X[:, :, :1000]
         
