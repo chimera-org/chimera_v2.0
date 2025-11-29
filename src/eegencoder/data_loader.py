@@ -23,7 +23,7 @@ class BCIC4_2A_Loader:
         """
         self.data_path = data_path
         self.sfreq = 250  # Sampling frequency (Hz)
-        self.n_channels = 22
+        self.n_channels = 25
         self.n_trials = 288
         self.trial_length = 4  # seconds
         
