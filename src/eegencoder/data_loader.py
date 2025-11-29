@@ -23,7 +23,7 @@ class BCIC4_2A_Loader:
         """
         self.data_path = data_path
         self.sfreq = 250  # Sampling frequency (Hz)
-        self.n_channels = 25
+        self.n_channels = 22  # EEG channels only (excluding 3 EOG)
         self.n_trials = 288
         self.trial_length = 4  # seconds
         
@@ -34,6 +34,13 @@ class BCIC4_2A_Loader:
             'foot': 3,
             'tongue': 4
         }
+        
+        # EEG channel names (22 channels)
+        self.eeg_channels = [
+            'Fz', 'FC3', 'FC1', 'FCz', 'FC2', 'FC4', 'C5', 'C3', 'C1', 'Cz',
+            'C2', 'C4', 'C6', 'CP3', 'CP1', 'CPz', 'CP2', 'CP4', 'P1', 'Pz',
+            'P2', 'POz'
+        ]
         
     def load_subject(self, subject_id, training=True):
         """
@@ -53,6 +60,10 @@ class BCIC4_2A_Loader:
         # Load raw GDF file
         raw = read_raw_gdf(filename, preload=True, verbose=False)
         
+        # CRITICAL: Pick only EEG channels (first 22)
+        # The raw file has 25 channels: 22 EEG + 3 EOG (last 3)
+        raw.pick_channels(self.eeg_channels)
+        
         # Apply bandpass filter (4-38 Hz) - critical for motor imagery
         raw.filter(l_freq=4, h_freq=38, method='iir', verbose=False)
         
@@ -66,14 +77,14 @@ class BCIC4_2A_Loader:
         # tmin=0 (cue onset), tmax=4 (4 seconds after cue)
         epochs = Epochs(raw, events, event_id=self.event_id,
                        tmin=0, tmax=4, baseline=None,
-                       preload=True, verbose=False, event_repeated='merge')
+                       preload=True, verbose=False)
         
         # Convert to NumPy arrays
         X = epochs.get_data()  # Shape: (n_trials, 22, 1000)
         y = epochs.events[:, -1] - 1  # Convert to 0-indexed labels
         
         # Basic sanity checks
-        assert X.shape[1] == self.n_channels, f"Expected 22 channels, got {X.shape[1]}"
+        assert X.shape[1] == self.n_channels, f"Expected {self.n_channels} channels, got {X.shape[1]}"
         assert X.shape[2] == self.sfreq * self.trial_length, "Trial length mismatch"
         
         return X, y
