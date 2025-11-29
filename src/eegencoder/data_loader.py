@@ -66,4 +66,10 @@ class BCIC4_2A_Loader:
 def verify_dataset(loader, subject_id=1):
     print(f"\n🔍 Verifying Subject {subject_id:02d}...")
     X, y = loader.load_subject(subject_id)
-    print(f"✅ Loaded: X={X.shape}, labels={
+    print(f"✅ Loaded: X={X.shape}, labels={np.bincount(y)}")
+    return X, y
+
+# Quick test
+if __name__ == "__main__":
+    loader = BCIC4_2A_Loader()
+    X, y = verify_dataset(loader, subject_id=1)
