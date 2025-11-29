@@ -66,7 +66,7 @@ class BCIC4_2A_Loader:
         # tmin=0 (cue onset), tmax=4 (4 seconds after cue)
         epochs = Epochs(raw, events, event_id=self.event_id,
                        tmin=0, tmax=4, baseline=None,
-                       preload=True, verbose=False)
+                       preload=True, verbose=False, event_repeated='merge')
         
         # Convert to NumPy arrays
         X = epochs.get_data()  # Shape: (n_trials, 22, 1000)
