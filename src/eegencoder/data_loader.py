@@ -1,6 +1,6 @@
 """
 BCI Competition IV 2a Data Loader
-Correct string-based event handling throughout
+Correct annotation → code → label mapping
 """
 
 import numpy as np
@@ -31,22 +31,26 @@ class BCIC4_2A_Loader:
         # DEBUG
         print(f"  Event mapping: {event_dict}")
         
-        # Use string-based event_id (MNE requires this for GDF)
-        event_id = {
-            '769': 0,  # left_hand → label 0
-            '770': 1,  # right_hand → label 1
-            '771': 2,  # foot → label 2
-            '772': 3   # tongue → label 3
-        }
+        # 1. Filter events to ONLY motor imagery (by internal codes)
+        mi_internal_codes = [event_dict['769'], event_dict['770'], 
+                            event_dict['771'], event_dict['772']]
+        mi_events = events[np.isin(events[:, 2], mi_internal_codes)]
         
-        # Create epochs - MNE maps strings to internal codes automatically
-        epochs = Epochs(raw, events, event_id=event_id,
+        print(f"  MI events found: {len(mi_events)}")
+        
+        # 2. Create epochs with clean label mapping
+        # Use internal codes as keys, map to 0-3 labels
+        epochs = Epochs(raw, mi_events, 
+                       event_id={mi_internal_codes[0]: 0,
+                                mi_internal_codes[1]: 1,
+                                mi_internal_codes[2]: 2,
+                                mi_internal_codes[3]: 3},
                        tmin=2.0, tmax=6.0, baseline=None,
                        preload=True, verbose=False,
                        event_repeated='drop')
         
         X = epochs.get_data()
-        y = epochs.events[:, -1]  # Already 0-3 from event_id mapping
+        y = epochs.events[:, -1]  # Already 0-3 from event_id
         
         # Fix length
         if X.shape[2] == 1001:
