@@ -1,6 +1,6 @@
 """
 BCI Competition IV 2a Data Loader
-Compatible with MNE's string-based event handling
+Correct event mapping: Uses MNE's internal codes directly
 """
 
 import numpy as np
@@ -14,7 +14,8 @@ class BCIC4_2A_Loader:
         self.data_path = data_path
         self.sfreq = 250
         self.n_channels = 22
-        self.trial_length = 4  # MI period
+        self.n_trials = 288
+        self.trial_length = 4
         
     def load_subject(self, subject_id, training=True):
         suffix = 'T' if training else 'E'
@@ -24,43 +25,50 @@ class BCIC4_2A_Loader:
         raw.pick_channels(raw.ch_names[:self.n_channels])
         raw.filter(l_freq=4, h_freq=38, method='iir', verbose=False)
         
-        # Get events (returns string-based annotation mapping)
+        # Get events and their internal mapping
         events, event_dict = events_from_annotations(raw, verbose=False)
         
-        # BCI IV 2a event codes in GDF: 769, 770, 771, 772
-        # Use STRING keys for event_id (MNE requirement for GDF)
-        event_id = {
-            '769': 1,  # left_hand
-            '770': 2,  # right_hand
-            '771': 3,  # foot
-            '772': 4   # tongue
-        }
+        # DEBUG: Show what we're working with
+        print(f"  Event mapping: {event_dict}")
         
-        # CRITICAL: Do NOT subtract from events array
-        # The integer codes in events[:, 2] map to annotation strings via event_dict
-        # Just filter for motor imagery events using event_id
+        # Load ALL epochs first (including markers, artifacts, etc.)
+        # Use a broad event_id to capture everything, then filter
+        all_epochs = Epochs(raw, events, event_id=None,  # Load ALL events
+                           tmin=0, tmax=6, baseline=None,
+                           preload=True, verbose=False,
+                           event_repeated='drop')
         
-        print(f"DEBUG: Found events: {event_dict}")
-        print(f"DEBUG: Selecting: {list(event_id.keys())}")
+        # Now select ONLY motor imagery trials by annotation
+        # This uses string keys to select epochs (cleaner than numeric codes)
+        mi_epochs = all_epochs['769', '770', '771', '772']
         
-        # Epoch MI period (2s-6s = 4 seconds)
-        epochs = Epochs(raw, events, event_id=event_id,
-                       tmin=2.0, tmax=6.0, baseline=None,
-                       preload=True, verbose=False,
-                       event_repeated='drop',
-                       on_missing='ignore')  # Skip unknown events
+        X = mi_epochs.get_data()
         
-        X = epochs.get_data()
-        y = epochs.events[:, -1] - 1  # Convert 1-4 → 0-3
+        # Extract labels from epochs metadata
+        # events array contains [sample, duration, event_code]
+        # event_code for MI classes are 7,8,9,10 (from event_dict)
+        # Map them to 0-3
+        event_code_to_label = {7: 0, 8: 1, 9: 2, 10: 3}
+        y = np.array([event_code_to_label[e] for e in mi_epochs.events[:, 2]])
         
-        print(f"✅ Final shape: {X.shape}, Labels: {len(y)}")
+        # Trim to exactly 4 seconds (handle off-by-one)
+        if X.shape[2] == 1001:  # MNE sometimes gives extra sample
+            X = X[:, :, :1000]
+        elif X.shape[2] == 999:  # Or missing one
+            X = np.pad(X, ((0,0), (0,0), (0,1)), mode='edge')
+        
+        # Final verification
+        assert X.shape == (self.n_trials, self.n_channels, self.sfreq * self.trial_length), \
+            f"Expected {(self.n_trials, self.n_channels, self.sfreq * self.trial_length)}, got {X.shape}"
+        assert len(y) == self.n_trials, f"Expected {self.n_trials} trials, got {len(y)}"
+        
+        print(f"  ✅ Loaded: X={X.shape}, labels={np.bincount(y)}")
         return X, y
 
-# Test function
 def verify_dataset(loader, subject_id=1):
     print(f"\n🔍 Verifying Subject {subject_id:02d}...")
     X, y = loader.load_subject(subject_id)
-    print(f"✅ Success: X={X.shape}, labels={np.bincount(y)}")
+    print(f"🎯 Final: X={X.shape}, labels={np.bincount(y)}")
     return X, y
 
 # Quick test
