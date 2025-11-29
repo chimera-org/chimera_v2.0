@@ -4,6 +4,7 @@ Motor Imagery EEG Dataset Loader for EEGEncoder
 """
 
 import numpy as np
+from pathlib import Path
 from mne.io import read_raw_gdf
 from mne import events_from_annotations, Epochs
 import warnings
@@ -21,7 +22,7 @@ class BCIC4_2A_Loader:
         Args:
             data_path: Path to folder with A01T.gdf, A01E.gdf, etc.
         """
-        self.data_path = data_path
+        self.data_path = Path(data_path)
         self.sfreq = 250  # Sampling rate (Hz)
         self.n_channels = 22  # EEG channels (excludes 3 EOG)
         self.trial_length = 4  # Motor imagery duration (seconds)
@@ -39,7 +40,7 @@ class BCIC4_2A_Loader:
             y: np.array (n_trials,) - Labels (0=left, 1=right, 2=foot, 3=tongue)
         """
         suffix = 'T' if training else 'E'
-        filename = f"{self.data_path}A{subject_id:02d}{suffix}.gdf"
+        filename = self.data_path / f"A{subject_id:02d}{suffix}.gdf"
         
         # Load and preprocess
         raw = read_raw_gdf(filename, preload=True, verbose=False)
@@ -60,7 +61,7 @@ class BCIC4_2A_Loader:
                        preload=True, verbose=False,
                        event_repeated='drop')
         
-        # Get data and labels
+        # Get data
         X = epochs.get_data()
         
         # Map event codes to labels 0-3
