@@ -1,6 +1,6 @@
 """
 BCI Competition IV 2a Data Loader
-Correct event mapping: Uses MNE's internal codes directly
+Correct event selection by numeric codes
 """
 
 import numpy as np
@@ -28,50 +28,38 @@ class BCIC4_2A_Loader:
         # Get events and their internal mapping
         events, event_dict = events_from_annotations(raw, verbose=False)
         
-        # DEBUG: Show what we're working with
+        # DEBUG
         print(f"  Event mapping: {event_dict}")
         
-        # Load ALL epochs first (including markers, artifacts, etc.)
-        # Use a broad event_id to capture everything, then filter
-        all_epochs = Epochs(raw, events, event_id=None,  # Load ALL events
+        # Load all events, then filter by numeric codes
+        all_epochs = Epochs(raw, events, event_id=None,
                            tmin=0, tmax=6, baseline=None,
                            preload=True, verbose=False,
                            event_repeated='drop')
         
-        # Now select ONLY motor imagery trials by annotation
-        # This uses string keys to select epochs (cleaner than numeric codes)
-        mi_epochs = all_epochs['769', '770', '771', '772']
+        # Select motor imagery trials by internal codes
+        # From your debug: '769':7, '770':8, '771':9, '772':10
+        mi_epochs = all_epochs[7, 8, 9, 10]  # NUMERIC codes, not strings!
         
         X = mi_epochs.get_data()
         
-        # Extract labels from epochs metadata
-        # events array contains [sample, duration, event_code]
-        # event_code for MI classes are 7,8,9,10 (from event_dict)
-        # Map them to 0-3
+        # Map internal codes to labels
         event_code_to_label = {7: 0, 8: 1, 9: 2, 10: 3}
         y = np.array([event_code_to_label[e] for e in mi_epochs.events[:, 2]])
         
-        # Trim to exactly 4 seconds (handle off-by-one)
-        if X.shape[2] == 1001:  # MNE sometimes gives extra sample
+        # Fix length off-by-one
+        if X.shape[2] == 1001:
             X = X[:, :, :1000]
-        elif X.shape[2] == 999:  # Or missing one
-            X = np.pad(X, ((0,0), (0,0), (0,1)), mode='edge')
         
-        # Final verification
-        assert X.shape == (self.n_trials, self.n_channels, self.sfreq * self.trial_length), \
-            f"Expected {(self.n_trials, self.n_channels, self.sfreq * self.trial_length)}, got {X.shape}"
-        assert len(y) == self.n_trials, f"Expected {self.n_trials} trials, got {len(y)}"
-        
+        assert X.shape == (self.n_trials, self.n_channels, self.sfreq * self.trial_length)
         print(f"  ✅ Loaded: X={X.shape}, labels={np.bincount(y)}")
         return X, y
 
 def verify_dataset(loader, subject_id=1):
     print(f"\n🔍 Verifying Subject {subject_id:02d}...")
     X, y = loader.load_subject(subject_id)
-    print(f"🎯 Final: X={X.shape}, labels={np.bincount(y)}")
     return X, y
 
-# Quick test
 if __name__ == "__main__":
     loader = BCIC4_2A_Loader()
     X, y = verify_dataset(loader, subject_id=1)
