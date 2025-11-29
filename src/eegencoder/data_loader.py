@@ -1,6 +1,6 @@
 """
 BCI Competition IV 2a Data Loader
-Correct annotation → code → label mapping
+Manual label management (bypass MNE type checking)
 """
 
 import numpy as np
@@ -28,35 +28,40 @@ class BCIC4_2A_Loader:
         # Get events and mapping
         events, event_dict = events_from_annotations(raw, verbose=False)
         
-        # DEBUG
-        print(f"  Event mapping: {event_dict}")
+        # Map annotations to internal codes
+        mi_codes = [event_dict['769'], event_dict['770'], 
+                   event_dict['771'], event_dict['772']]
         
-        # 1. Filter events to ONLY motor imagery (by internal codes)
-        mi_internal_codes = [event_dict['769'], event_dict['770'], 
-                            event_dict['771'], event_dict['772']]
-        mi_events = events[np.isin(events[:, 2], mi_internal_codes)]
+        # Filter to MI events
+        mi_selector = np.isin(events[:, 2], mi_codes)
+        mi_events_original = events[mi_selector]
         
-        print(f"  MI events found: {len(mi_events)}")
+        print(f"  MI events found: {len(mi_events_original)}")
         
-        # 2. Create epochs with clean label mapping
-        # Use internal codes as keys, map to 0-3 labels
-        epochs = Epochs(raw, mi_events, 
-                       event_id={mi_internal_codes[0]: 0,
-                                mi_internal_codes[1]: 1,
-                                mi_internal_codes[2]: 2,
-                                mi_internal_codes[3]: 3},
+        # Create epochs with NO event_id (pass raw events)
+        # We will assign labels manually
+        epochs = Epochs(raw, mi_events_original, event_id=None,
                        tmin=2.0, tmax=6.0, baseline=None,
                        preload=True, verbose=False,
                        event_repeated='drop')
         
         X = epochs.get_data()
-        y = epochs.events[:, -1]  # Already 0-3 from event_id
+        
+        # Map internal codes to labels 0-3
+        # event_dict: {'769':7, '770':8, '771':9, '772':10}
+        code_to_label = {event_dict['769']:0, event_dict['770']:1, 
+                        event_dict['771']:2, event_dict['772']:3}
+        
+        # Extract labels from events array (mi_events_original)
+        y = np.array([code_to_label[code] for code in mi_events_original[:, 2]])
         
         # Fix length
         if X.shape[2] == 1001:
             X = X[:, :, :1000]
         
         assert X.shape == (self.n_trials, self.n_channels, self.sfreq * self.trial_length)
+        assert len(y) == self.n_trials
+        
         print(f"  ✅ Loaded: X={X.shape}, labels={np.bincount(y)}")
         return X, y
 
