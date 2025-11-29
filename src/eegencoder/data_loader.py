@@ -1,6 +1,6 @@
 """
 BCI Competition IV 2a Data Loader
-Correct event selection by numeric codes
+Fixed inst.pick() API and robust event filtering
 """
 
 import numpy as np
@@ -22,32 +22,31 @@ class BCIC4_2A_Loader:
         filename = f"{self.data_path}A{subject_id:02d}{suffix}.gdf"
         
         raw = read_raw_gdf(filename, preload=True, verbose=False)
-        raw.pick_channels(raw.ch_names[:self.n_channels])
+        
+        # FIXED: Use inst.pick() instead of pick_channels()
+        raw.pick(raw.ch_names[:self.n_channels])
+        
         raw.filter(l_freq=4, h_freq=38, method='iir', verbose=False)
         
-        # Get events and their internal mapping
+        # Get all events
         events, event_dict = events_from_annotations(raw, verbose=False)
         
-        # DEBUG
-        print(f"  Event mapping: {event_dict}")
+        # Filter motor imagery events (internal codes 7,8,9,10)
+        mi_events = events[np.isin(events[:, 2], [7, 8, 9, 10])]
         
-        # Load all events, then filter by numeric codes
-        all_epochs = Epochs(raw, events, event_id=None,
-                           tmin=0, tmax=6, baseline=None,
-                           preload=True, verbose=False,
-                           event_repeated='drop')
+        # Create epochs with MI events only
+        epochs = Epochs(raw, mi_events, event_id={7:1, 8:2, 9:3, 10:4},
+                       tmin=2.0, tmax=6.0, baseline=None,
+                       preload=True, verbose=False,
+                       event_repeated='drop')
         
-        # Select motor imagery trials by internal codes
-        # From your debug: '769':7, '770':8, '771':9, '772':10
-        mi_epochs = all_epochs[7, 8, 9, 10]  # NUMERIC codes, not strings!
+        X = epochs.get_data()
         
-        X = mi_epochs.get_data()
+        # Map internal codes to labels 0-3
+        event_code_to_label = {7:0, 8:1, 9:2, 10:3}
+        y = np.array([event_code_to_label[e] for e in epochs.events[:, 2]])
         
-        # Map internal codes to labels
-        event_code_to_label = {7: 0, 8: 1, 9: 2, 10: 3}
-        y = np.array([event_code_to_label[e] for e in mi_epochs.events[:, 2]])
-        
-        # Fix length off-by-one
+        # Trim to exactly 1000 samples (4s @ 250Hz)
         if X.shape[2] == 1001:
             X = X[:, :, :1000]
         
