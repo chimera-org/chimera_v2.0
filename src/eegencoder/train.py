@@ -1,82 +1,55 @@
 """
-EEGEncoder Training Loop with Cross-Subject Validation
-Supports both GPU and Raspberry Pi 4 CPU training
+EEGEncoder Training Loop
+Includes: LOSO dataloaders, label smoothing, early stopping
 """
 
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
-from sklearn.metrics import accuracy_score, cohen_kappa_score, confusion_matrix
+from sklearn.metrics import accuracy_score, cohen_kappa_score
 import numpy as np
 from tqdm import tqdm
 import json
 import time
 from pathlib import Path
-import os
+import warnings
+warnings.filterwarnings('ignore')
 
 class StreamingDataset(Dataset):
-    """Memory-efficient dataset for Pi (loads from disk on demand)"""
-    def __init__(self, data_dir, subject_ids, is_training=True, transform=None):
+    """Memory-efficient dataset for EEG trials"""
+    def __init__(self, data_dir, subject_ids, is_training=True):
         self.data_dir = Path(data_dir)
         self.subject_ids = subject_ids
         self.is_training = is_training
-        self.transform = transform
-        self.filepaths = self._get_filepaths()
         
-    def _get_filepaths(self):
-        """Pre-compute all file paths to avoid disk scanning"""
-        paths = []
-        for subj_id in self.subject_ids:
-            suffix = 'train' if self.is_training else 'eval'
-            X_path = self.data_dir / f"subject_{subj_id:02d}_{suffix}_X.npy"
-            y_path = self.data_dir / f"subject_{subj_id:02d}_{suffix}_y.npy"
+        self.filepaths = []
+        for subj_id in subject_ids:
+            suffix = 'train' if is_training else 'eval'
+            X_path = self.data_dir / f"subject_{subj_id:02d}_X.npy"
+            y_path = self.data_dir / f"subject_{subj_id:02d}_y.npy"
             if X_path.exists():
-                paths.append((X_path, y_path))
-        return paths
+                self.filepaths.append((X_path, y_path))
     
     def __len__(self):
-        return len(self.filepaths) * 288  # 288 trials per subject
+        return len(self.filepaths) * 288  # Approximate, will be trimmed
     
     def __getitem__(self, idx):
-        # Determine which subject file to load
         file_idx = idx // 288
         trial_idx = idx % 288
         
+        if file_idx >= len(self.filepaths):
+            raise IndexError
+        
         X_path, y_path = self.filepaths[file_idx]
         
-        # Load only the needed trial (memory efficient)
+        # Load only needed trial
         X = np.load(X_path, mmap_mode='r')[trial_idx]
         y = np.load(y_path, mmap_mode='r')[trial_idx]
         
-        if self.transform:
-            X = self.transform(X)
-            
         return torch.FloatTensor(X), torch.LongTensor([y])[0]
 
-def get_loso_dataloaders(data_dir, test_subject, batch_size=32, num_workers=0):
-    """
-    Leave-One-Subject-Out (LOSO) cross-validation
-    Returns train/test loaders for one fold
-    """
-    train_subjects = [i for i in range(1, 10) if i != test_subject]
-    
-    train_dataset = StreamingDataset(data_dir, train_subjects, is_training=True)
-    test_dataset = StreamingDataset(data_dir, [test_subject], is_training=True)
-    
-    train_loader = DataLoader(
-        train_dataset, batch_size=batch_size, shuffle=True,
-        num_workers=num_workers, pin_memory=False  # pin_memory=False for Pi
-    )
-    
-    test_loader = DataLoader(
-        test_dataset, batch_size=batch_size, shuffle=False,
-        num_workers=num_workers, pin_memory=False
-    )
-    
-    return train_loader, test_loader
-
 class LabelSmoothingCE(nn.Module):
-    """Cross-Entropy with label smoothing (from paper)"""
+    """Cross-Entropy with label smoothing"""
     def __init__(self, num_classes=4, smoothing=0.1):
         super().__init__()
         self.smoothing = smoothing
@@ -114,7 +87,7 @@ class EarlyStopping:
             self.counter = 0
 
 def train_epoch(model, train_loader, criterion, optimizer, device, epoch):
-    """Train one epoch with progress bar"""
+    """Train one epoch"""
     model.train()
     running_loss = 0.0
     all_preds, all_labels = [], []
@@ -127,10 +100,7 @@ def train_epoch(model, train_loader, criterion, optimizer, device, epoch):
         output = model(data)
         loss = criterion(output, target)
         loss.backward()
-        
-        # Gradient clipping for stability
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-        
         optimizer.step()
         
         running_loss += loss.item()
@@ -148,7 +118,7 @@ def train_epoch(model, train_loader, criterion, optimizer, device, epoch):
     return {'loss': epoch_loss, 'accuracy': accuracy, 'kappa': kappa}
 
 def evaluate(model, test_loader, criterion, device, desc="[Eval]"):
-    """Evaluate model and return metrics"""
+    """Evaluate model"""
     model.eval()
     running_loss = 0.0
     all_preds, all_labels = [], []
@@ -170,25 +140,80 @@ def evaluate(model, test_loader, criterion, device, desc="[Eval]"):
     
     return {'loss': test_loss, 'accuracy': accuracy, 'kappa': kappa}
 
-def train_model(
-    model,
-    train_loader,
-    test_loader,
-    device,
-    epochs=30,
-    lr=1e-3,
-    weight_decay=1e-4,
-    save_dir="models/",
-    test_subject=1
-):
-    """Full training loop with checkpointing"""
+def get_loso_dataloaders(data_dir, test_subject, batch_size=32, num_workers=0):
+    """
+    Leave-One-Subject-Out (LOSO) data loaders
+    
+    Args:
+        data_dir: Path to processed numpy files
+        test_subject: Subject ID to hold out for testing
+        batch_size: Batch size for training
+        num_workers: Number of workers for DataLoader
+        
+    Returns:
+        train_loader: DataLoader for training subjects
+        test_loader: DataLoader for test subject
+    """
+    data_path = Path(data_dir)
+    
+    # Training subjects
+    train_subjects = [i for i in range(1, 10) if i != test_subject]
+    train_files = []
+    
+    for subj_id in train_subjects:
+        X_path = data_path / f"subject_{subj_id:02d}_X.npy"
+        y_path = data_path / f"subject_{subj_id:02d}_y.npy"
+        if X_path.exists():
+            train_files.append((X_path, y_path))
+    
+    # Test subject
+    test_X_path = data_path / f"subject_{test_subject:02d}_X.npy"
+    test_y_path = data_path / f"subject_{test_subject:02d}_y.npy"
+    
+    # Load all data into memory (faster for training)
+    X_train_list, y_train_list = [], []
+    for X_path, y_path in train_files:
+        X_train_list.append(np.load(X_path))
+        y_train_list.append(np.load(y_path))
+    
+    X_train = np.concatenate(X_train_list, axis=0)
+    y_train = np.concatenate(y_train_list, axis=0)
+    
+    X_test = np.load(test_X_path)
+    y_test = np.load(test_y_path)
+    
+    print(f"Loaded: Train={X_train.shape}, Test={X_test.shape}")
+    
+    # Create datasets
+    train_dataset = torch.utils.data.TensorDataset(
+        torch.FloatTensor(X_train), torch.LongTensor(y_train)
+    )
+    test_dataset = torch.utils.data.TensorDataset(
+        torch.FloatTensor(X_test), torch.LongTensor(y_test)
+    )
+    
+    # Create dataloaders
+    train_loader = DataLoader(
+        train_dataset, batch_size=batch_size, shuffle=True,
+        num_workers=num_workers, pin_memory=True
+    )
+    test_loader = DataLoader(
+        test_dataset, batch_size=batch_size, shuffle=False,
+        num_workers=num_workers, pin_memory=True
+    )
+    
+    return train_loader, test_loader
+
+def train_model(model, train_loader, test_loader, device, epochs=30, 
+                lr=1e-3, weight_decay=1e-4, test_subject=1, save_dir="models/"):
+    """
+    Full training loop with checkpointing
+    """
     save_dir = Path(save_dir)
     save_dir.mkdir(exist_ok=True)
     
     # Optimizer and scheduler
-    optimizer = torch.optim.AdamW(
-        model.parameters(), lr=lr, weight_decay=weight_decay
-    )
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = torch.optim.lr_scheduler.OneCycleLR(
         optimizer, max_lr=lr, steps_per_epoch=len(train_loader), epochs=epochs
     )
@@ -226,7 +251,7 @@ def train_model(
         
         epoch_time = time.time() - start_time
         
-        # Print epoch summary
+        # Print summary
         print(f"Epoch {epoch:02d}/{epochs} | "
               f"Train: {train_metrics['accuracy']:.4f} | "
               f"Val: {val_metrics['accuracy']:.4f} | "
@@ -246,7 +271,7 @@ def train_model(
             }, save_dir / f"eegencoder_subject{test_subject:02d}_best.pth")
             print(f"💾 Checkpoint saved (Accuracy: {best_accuracy:.4f})")
         
-        # Early stopping check
+        # Early stopping
         early_stopper(val_metrics['loss'])
         if early_stopper.early_stop:
             print(f"🛑 Early stopping triggered at epoch {epoch}")
@@ -256,7 +281,7 @@ def train_model(
     checkpoint = torch.load(save_dir / f"eegencoder_subject{test_subject:02d}_best.pth")
     model.load_state_dict(checkpoint['model_state_dict'])
     
-    # Final evaluation with confusion matrix
+    # Final evaluation
     final_metrics = evaluate(model, test_loader, criterion, device, desc="[Final]")
     
     print(f"\n🏆 Final Results (Test Subject {test_subject:02d}):")
@@ -270,7 +295,9 @@ def train_model(
     return model, history
 
 def run_loso_cross_validation(data_dir, subjects=range(1, 10), device='cpu', epochs=20):
-    """Run full LOSO cross-validation"""
+    """
+    Run full LOSO cross-validation across all subjects
+    """
     results = []
     
     for test_subject in subjects:
