@@ -278,7 +278,10 @@ def train_model(model, train_loader, test_loader, device, epochs=30,
             break
     
     # Load best model
-    checkpoint = torch.load(save_dir / f"eegencoder_subject{test_subject:02d}_best.pth")
+    checkpoint = torch.load(
+    save_dir / f"eegencoder_subject{test_subject:02d}_best.pth",
+    weights_only=False  # Allow numpy dtypes
+    )
     model.load_state_dict(checkpoint['model_state_dict'])
     
     # Final evaluation
