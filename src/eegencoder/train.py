@@ -49,24 +49,6 @@ class StreamingDataset(Dataset):
         
         return torch.FloatTensor(X), torch.LongTensor([y])[0]
 
-class LabelSmoothingCE(nn.Module):
-    """Cross-Entropy with label smoothing"""
-    def __init__(self, num_classes=4, smoothing=0.1):
-        super().__init__()
-        self.smoothing = smoothing
-        self.num_classes = num_classes
-        
-    def forward(self, pred, target):
-        confidence = 1.0 - self.smoothing
-        log_probs = torch.log_softmax(pred, dim=-1)
-        
-        with torch.no_grad():
-            true_dist = torch.zeros_like(pred)
-            true_dist.fill_(self.smoothing / (self.num_classes - 1))
-            true_dist.scatter_(1, target.data.unsqueeze(1), confidence)
-        
-        return torch.mean(torch.sum(-true_dist * log_probs, dim=-1))
-
 class EarlyStopping:
     """Stop training when validation stops improving"""
     def __init__(self, patience=5, min_delta=0.001):
@@ -220,7 +202,7 @@ def train_model(model, train_loader, test_loader, device, epochs=30,
     )
     
     # Loss function
-    criterion = LabelSmoothingCE(num_classes=4, smoothing=0.1)
+    criterion = nn.CrossEntropyLoss()
     
     # Early stopping
     early_stopper = EarlyStopping(patience=7)
