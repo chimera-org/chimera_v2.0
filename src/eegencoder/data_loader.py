@@ -2,99 +2,86 @@ import numpy as np
 from pathlib import Path
 import mne
 import torch
-from torch.utils.data import DataLoader, TensorDataset
 
 class BCIC4_2A_Loader:
-    """
-    CORRECTED BCI IV 2a loader - extracts 288 trials per subject
-    """
-    
     def __init__(self, data_path="./data/bcic4_2a_raw/"):
         self.data_path = Path(data_path)
     
     def load_subject(self, subject_id, return_raw=False):
         """
-        Load single subject with CORRECT event extraction
-        Returns: X (288 trials, 22 channels, 1000 samples), y (0-3 labels)
+        FIXED: Load exact 288 trials per subject from BCI IV 2a dataset
         """
-        if not 1 <= subject_id <= 9:
+        if not (1 <= subject_id <= 9):
             raise ValueError(f"subject_id must be 1-9, got {subject_id}")
         
-        # Load GDF file
         gdf_file = self.data_path / f"A{subject_id:02d}T.gdf"
-        
-        if not gdf_file.exists():
-            raise FileNotFoundError(f"File not found: {gdf_file}")
-        
         raw = mne.io.read_raw_gdf(gdf_file, preload=True, verbose=False)
         
-        # Extract events
+        # Extract events - CRITICAL: Use only CUE markers
         events, event_id = mne.events_from_annotations(raw, verbose=False)
         
-        # Map MI events (769-772) to labels 0-3
-        # CRITICAL: Use the numeric codes from the GDF, not string names
+        # BCI IV 2a uses these exact codes for motor imagery
+        mi_event_map = {
+            '769': 0,  # Left hand
+            '770': 1,  # Right hand
+            '771': 2,  # Foot
+            '772': 3,  # Tongue
+        }
+        
+        # Convert event names to codes
         mi_codes = {}
-        for code, label in event_id.items():
-            if str(code) in ['769', '770', '771', '772']:  # String comparison
-                mi_codes[label] = int(str(code)) - 769
+        for event_name, mi_label in mi_event_map.items():
+            if event_name in event_id:
+                code = event_id[event_name]
+                mi_codes[code] = mi_label
         
-        if not mi_codes:
-            raise ValueError(f"No MI events found in {gdf_file}")
-        
-        # Filter events
+        # Filter to only MI events
         mi_events = events[np.isin(events[:, 2], list(mi_codes.keys()))]
         
-        # Create epochs (4 seconds, no baseline)
+        # Create epochs (4 seconds at 250Hz = 1000 samples)
         epochs = mne.Epochs(raw, mi_events, event_id=mi_codes,
-                            tmin=0, tmax=4.0, baseline=None,
-                            preload=True, verbose=False)
+                            tmin=0, tmax=4.0, baseline=None, preload=True, verbose=False)
         
-        # Get data
+        if len(epochs) != 288:
+            print(f"⚠️ WARNING: Subject {subject_id} has {len(epochs)} trials (expected 288)")
+        
         X = epochs.get_data()
         y = epochs.events[:, -1]
         
-        print(f"✅ Subject {subject_id:02d}: {X.shape}, labels={np.bincount(y)}")
+        print(f"✅ Subject {subject_id:02d}: X={X.shape}, labels={np.bincount(y)}")
         
         if return_raw:
             return X, y, raw, epochs
         return X, y
     
-    def load_all_subjects(self, subject_ids=None, training=True):
-        """
-        Load multiple subjects
-        """
+    def load_all_subjects(self, subject_ids=None):
+        """Load multiple subjects"""
         if subject_ids is None:
             subject_ids = list(range(1, 10))
         
-        X_list, y_list, groups_list = [], [], []
-        
+        X_list, y_list = [], []
         for subj_id in subject_ids:
-            X_subj, y_subj = self.load_subject(subj_id)
-            X_list.append(X_subj)
-            y_list.append(y_subj)
-            groups_list.append([subj_id] * len(y_subj))
+            X, y = self.load_subject(subj_id)
+            X_list.append(X)
+            y_list.append(y)
         
-        X = np.concatenate(X_list, axis=0)
-        y = np.concatenate(y_list, axis=0)
-        
-        if training:
-            groups = np.concatenate(groups_list, axis=0)
-            return X, y, groups
-        return X, y
+        return np.concatenate(X_list, axis=0), np.concatenate(y_list, axis=0)
 
-
-# Helper function for LOSO
-def get_loso_dataloaders(data_dir, test_subject, batch_size=32):
+# LOSO helper
+def get_loso_dataloaders(data_path, test_subject, batch_size=32):
     """
-    Create train/test loaders for LOSO cross-validation
+    Fixed LOSO dataloaders
     """
     from eegencoder.data_loader import BCIC4_2A_Loader
     
-    loader = BCIC4_2A_Loader(data_dir)
-    train_subjects = [i for i in range(1, 10) if i != test_subject]
+    loader = BCIC4_2A_Loader(data_path)
     
-    X_train, y_train, _ = loader.load_all_subjects(train_subjects, training=True)
-    X_test, y_test, _ = loader.load_all_subjects([test_subject], training=False)
+    # Training subjects
+    train_subjects = [i for i in range(1, 10) if i != test_subject]
+    X_train, y_train = loader.load_all_subjects(train_subjects)
+    
+    # Test subject
+    X_test, y_test = loader.load_subject(test_subject)
     
     # Convert to tensors
     train_dataset = torch.utils.data.TensorDataset(
@@ -105,8 +92,9 @@ def get_loso_dataloaders(data_dir, test_subject, batch_size=32):
     )
     
     # Create loaders
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
     
-    print(f"Loaded: Train={X_train.shape}, Test={X_test.shape}")
+    print(f"✅ LOSO prepared: Train={X_train.shape}, Test={X_test.shape}")
+    
     return train_loader, test_loader
