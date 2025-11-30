@@ -7,6 +7,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 from sklearn.metrics import accuracy_score, cohen_kappa_score
+from eegencoder.model import get_model
 import numpy as np
 from tqdm import tqdm
 import json
@@ -314,7 +315,7 @@ def run_loso_cross_validation(data_dir, subjects=range(1, 10), device='cpu', epo
         )
         
         # Create model
-        model = EEGEncoder(num_classes=4, pi_compatibility=(device == 'cpu'))
+        model = get_model(num_classes=4, pi_compatibility=(device == 'cpu'))
         model = model.to(device)
         
         # Train
