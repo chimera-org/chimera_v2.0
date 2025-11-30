@@ -1,0 +1,12 @@
+# Ignore raw data (too large)
+*.gdf
+*.mat
+*.h5
+
+# Ignore processed data (recreate locally)
+bcic4_2a_processed/
+
+# Ignore temp files
+*.tmp
+*.log
+.DS_Store
